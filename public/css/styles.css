@@ -13,6 +13,11 @@
   --color-accent1: white;
   --color-accent2: black;
 }
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 #wrapper, nav ul, .specs ul, .upgrades ul {
   display: flex;
   justify-content: space-evenly;

@@ -32,6 +32,9 @@
     .upgrades {
         grid-column: 1/2;
     }
+    .upgrades h2 {
+        margin-left: 6%;
+    }
     .reviews, .upgrades {
         grid-row: 3/4;
     }
