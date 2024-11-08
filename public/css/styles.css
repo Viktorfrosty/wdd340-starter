@@ -105,7 +105,7 @@ footer p {
   background-color: var(--color-accent1);
   filter: opacity(75%);
 }
-.specs h3 {
+.specs h2 {
   grid-row: 1/2;
   margin: 0;
   padding: 0;
@@ -161,14 +161,14 @@ footer p {
 .upgrades a {
   margin-bottom: 20px;
 }
-.specs h3, .specs li {
+.specs h2, .specs li {
   font-size: 0.75rem;
   color: var(--color-secondary);
   margin-bottom: 5px;
 }
-.specs h3, .specs ul, .specs img {
+.specs h2, .specs ul, .specs img {
   z-index: 2;
 }
-.specs .bkg, .specs h3, .specs ul, .specs img {
+.specs .bkg, .specs h2, .specs ul, .specs img {
   grid-column: 1/2;
 }
