@@ -1,6 +1,8 @@
 @media only screen and (min-width: 1023px) {
-    #wrapper {
+    body {
         background-image: url('../images/site/small_check.jpg');
+    }
+    #wrapper {
         padding: 35px; 
     }
     #top-header {
@@ -12,20 +14,28 @@
         width: 95%;
         padding: 0px 10px;
     }
+    nav a {
+        font-size: 1.25rem;
+    }
     footer {
         margin-top: -5px;
         border-bottom-left-radius: 15px;
         border-bottom-right-radius: 15px;
         border-bottom: 5px solid var(--color-secondary);
     }
-    #main-section, #top-header, footer {
+    #main-section, #inventory-section, #top-header, footer {
         padding: 15px;
     }
-    nav, #main-section, #top-header, footer {
+    nav, #main-section, #inventory-section, #top-header, footer {
         background-color: var(--color-accent1);
         border-left: 5px solid var(--color-secondary);
         border-right: 5px solid var(--color-secondary);
     }
+    /* Error page elements*/
+    #error-ttl, #error-msg {
+        grid-column: 1/3;
+      }
+    /* Home page elements*/
     .reviews {
         grid-column: 2/3;
     }
@@ -43,10 +53,10 @@
         justify-self: center;
         width: 80%;
     }
-    #main-section h1 {
+    #main-title {
         font-size: 2rem;
     }
-    #main-section h1, #main-grid {
+    #main-title, #main-grid {
         grid-column: 1/3;
     }
     .specs {
@@ -64,4 +74,9 @@
     #tools {
         margin-top: 10px;
       }
+    /* Inv Page elements */
+    #inv-display {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
   }

@@ -1,10 +1,11 @@
-<%# Page Title %>
-<% if (title) { %>
+<section id="inventory-section">
+  <% if (title) { %>
     <h1><%= title %></h1>
     <% } else {
       res.redirect('/')
     } %>
 
-<% messages() %>
+<%# messages() %>
 
 <%- grid %>
+</section>
