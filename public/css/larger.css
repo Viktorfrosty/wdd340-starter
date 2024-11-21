@@ -23,10 +23,10 @@
         border-bottom-right-radius: 15px;
         border-bottom: 5px solid var(--color-secondary);
     }
-    #main-section, #inventory-section, #top-header, footer {
+    #main-section, #inventory-section, #vehicle-section, #top-header, footer {
         padding: 15px;
     }
-    nav, #main-section, #inventory-section, #top-header, footer {
+    nav, #main-section, #inventory-section, #vehicle-section, #top-header, footer {
         background-color: var(--color-accent1);
         border-left: 5px solid var(--color-secondary);
         border-right: 5px solid var(--color-secondary);

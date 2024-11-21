@@ -52,9 +52,29 @@ Util.buildClassificationGrid = async function(data){
       })
       grid += '</ul>'
     } else { 
-      grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+      grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>'
     }
     return grid
+}
+
+/* **************************************
+* Build the vehicle view HTML
+* ************************************ */
+Util.buildVehicleInformation = async function(info) {
+  let wrap
+  if (info.length > 0) {
+    wrap = '<div id="vehicle-info">'
+    wrap += `<img loading="lazy" src="${info[0].inv_image}" alt="Image of ${info[0].inv_make} ${info[0].inv_model} on CSE Motors">`
+    wrap += `<h3>Type: ${info[0].classification_name}</h3>`
+    wrap += `<h3>Color: ${info[0].inv_color}</h3>`
+    wrap += `<p>Miles: ${new Intl.NumberFormat('en-US').format(info[0].inv_miles)}</p>`
+    wrap += `<p>Price: $ ${new Intl.NumberFormat('en-US').format(info[0].inv_price)}</p>`
+    wrap += `<p>${info[0].inv_description}</p>`
+    wrap += '</div>'
+  } else {
+    wrap = '<p class="notice"> Sorry, the information could not be found.</p>'
+  }
+  return wrap
 }
 
 /* ****************************************
