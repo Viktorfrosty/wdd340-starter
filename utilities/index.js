@@ -35,14 +35,13 @@ Util.buildClassificationGrid = async function(data){
         grid += '<li>'
         grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
         + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-        + 'details"><img src="' + vehicle.inv_thumbnail 
-        +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-        +' on CSE Motors" /></a>'
+        + ' Details"><img src="' + vehicle.inv_thumbnail 
+        +'" alt="'+ vehicle.inv_make + ' ' + vehicle.inv_model 
+        +'"/></a>'
         grid += '<div class="namePrice">'
-        // grid += '<hr />'
         grid += '<h2>'
         grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-        + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
+        + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details">' 
         + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
         grid += '</h2>'
         grid += '<span>$' 
@@ -64,7 +63,7 @@ Util.buildVehicleInformation = async function(info) {
   let wrap
   if (info.length > 0) {
     wrap = '<div id="vehicle-info">'
-    wrap += `<img loading="lazy" src="${info[0].inv_image}" alt="Image of ${info[0].inv_make} ${info[0].inv_model} on CSE Motors">`
+    wrap += `<img loading="lazy" src="${info[0].inv_image}" alt="${info[0].inv_make} ${info[0].inv_model}">`
     wrap += `<h2>${info[0].inv_make} ${info[0].inv_model} Details</h2>`
     wrap += `<h3>Type: ${info[0].classification_name}</h3>`
     wrap += `<h3>Color: ${info[0].inv_color}</h3>`
