@@ -96,8 +96,8 @@
     }
     /* vehicle page elements */
     #vehicle-info {
-        grid-template-columns: 1fr, 2fr;
-        grid-row: repeat(6, auto);
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: repeat(6, auto);
         column-gap: 25px;
     }
     #vehicle-info img {

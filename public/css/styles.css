@@ -231,7 +231,7 @@ footer p {
 #vehicle-info {
   display: grid;
   grid-template-columns: auto;
-  grid-row: repeat(7, auto);
+  grid-template-rows: repeat(7, auto);
   padding: 10px;
 }
 #vehicle-info span {
