@@ -34,9 +34,9 @@ Util.buildClassificationGrid = async function(data){
       data.forEach(vehicle => { 
         grid += '<li>'
         grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-        + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-        + ' Details"><img src="' + vehicle.inv_thumbnail 
-        +'" alt="'+ vehicle.inv_make + ' ' + vehicle.inv_model 
+        + '" title="' + vehicle.inv_make + ' '+ vehicle.inv_model 
+        + '"><img src="' + vehicle.inv_thumbnail 
+        +'" alt="' + vehicle.inv_year + ' ' + vehicle.inv_make + ' ' + vehicle.inv_model 
         +'"></a>'
         grid += '<div class="namePrice">'
         grid += '<h2>'
@@ -63,7 +63,7 @@ Util.buildVehicleInformation = async function(info) {
   let wrap
   if (info.length > 0) {
     wrap = '<div id="vehicle-info">'
-    wrap += `<img loading="lazy" src="${info[0].inv_image}" alt="${info[0].inv_make} ${info[0].inv_model}">`
+    wrap += `<img loading="lazy" src="${info[0].inv_image}" alt="${info[0].inv_year} ${info[0].inv_make} ${info[0].inv_model}">`
     wrap += `<h2>${info[0].inv_make} ${info[0].inv_model} Details</h2>`
     wrap += `<p>${info[0].inv_description}</p>`
     wrap += `<span>Type: ${info[0].classification_name}</span>`
