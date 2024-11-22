@@ -65,11 +65,11 @@ Util.buildVehicleInformation = async function(info) {
     wrap = '<div id="vehicle-info">'
     wrap += `<img loading="lazy" src="${info[0].inv_image}" alt="${info[0].inv_make} ${info[0].inv_model}">`
     wrap += `<h2>${info[0].inv_make} ${info[0].inv_model} Details</h2>`
-    wrap += `<h3>Type: ${info[0].classification_name}</h3>`
-    wrap += `<h3>Color: ${info[0].inv_color}</h3>`
-    wrap += `<h3>Miles: ${new Intl.NumberFormat('en-US').format(info[0].inv_miles)}</h3>`
-    wrap += `<h3>Price: $ ${new Intl.NumberFormat('en-US').format(info[0].inv_price)}</h3>`
     wrap += `<p>${info[0].inv_description}</p>`
+    wrap += `<span>Type: ${info[0].classification_name}</span>`
+    wrap += `<span>Color: ${info[0].inv_color}</span>`
+    wrap += `<span>Miles: ${new Intl.NumberFormat('en-US').format(info[0].inv_miles)}</span>`
+    wrap += `<span>Price: $ ${new Intl.NumberFormat('en-US').format(info[0].inv_price)}</span>`
     wrap += '</div>'
   } else {
     wrap = '<p class="notice"> Sorry, the information could not be found.</p>'

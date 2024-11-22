@@ -1,10 +1,10 @@
-/******* Change Box Model ***************/
+/***** Change Box Model *****/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
-/******* general elements ***************/
+/***** general elements *****/
 :root {
   --main-fonts: Merriweather, Arial, sans-serif;
   --secondary-fonts: "Merriweather Sans", Cambria, serif;
@@ -17,9 +17,6 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-footer {
-  margin-top: 25px;
 }
 #wrapper, nav ul, .specs ul, .upgrades ul, #inv-display {
   display: flex;
@@ -34,7 +31,7 @@ footer {
 header a, p, h1, h2, h3 {
   color: var(--color-accent2);
 }
-nav a, a, h1, h2, h3 {
+nav a, a, h1, h2, h3, #vehicle-info span {
   font-family: var(--main-fonts);
 }
 p {
@@ -58,6 +55,7 @@ nav a {
   padding: 5px;
 }
 nav a:hover {
+  border-radius: 10px;
   background-color: var(--color-accent1);
   color: var(--color-accent2);
 }
@@ -93,7 +91,7 @@ footer p {
 #tools, nav a {
   font-size: 0.75rem;
 }
-/******* Error page elements *********/
+/*** Error page elements ***/
 #error-ttl {
   grid-row: 1/2;
 }
@@ -104,7 +102,7 @@ footer p {
   grid-column: 1/3;
   justify-self: center;
 }
-v
+/**** Main page elements ****/
 #main-title, #main-grid {
   grid-column: 1/2;
 }
@@ -200,15 +198,18 @@ v
 .specs .bkg, .specs h2, .specs ul, .specs img {
   grid-column: 1/2;
 }
-/******* Inv page elements ***********/
+/*** Inv page elements ***/
 #inv-display {
   gap: 25px;
+  margin-bottom: 25px;
 }
 #inv-display li {
   width: 90%;
   border-radius: 25px;
-  border: 5px solid var(--color-secondary);
+  border: 5px solid var(--color-accent2);
   text-align: center;
+  box-shadow: 15px 15px 5px var(--color-secondary);
+  margin-bottom: 10px
 }
 #inv-display li a {
   display: block;
@@ -220,8 +221,33 @@ v
   height: auto;
   border-top-left-radius: 19px;
   border-top-right-radius: 19px;
+  border-bottom: 5px solid var(--color-accent2);
 }
 #inv-display .namePrice {
   text-align: center;
   padding: 5px 5px 20px 5px;
+}
+/** vehicle page elements **/
+#vehicle-info {
+  display: grid;
+  grid-template-columns: auto;
+  grid-row: repeat(7, auto);
+  padding: 10px;
+}
+#vehicle-info span {
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+#vehicle-info img {
+  grid-row: 1/2;
+  border-radius: 15px;
+  width: 100%;
+  justify-self: center;
+}
+#vehicle-info h2{
+  margin-top: 0px;
+}
+#vehicle-info img,
+#vehicle-info h2, #vehicle-info span, #vehicle-info p {
+  grid-column: 1/2;
 }
