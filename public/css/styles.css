@@ -243,6 +243,7 @@ footer p {
   border-radius: 15px;
   width: 100%;
   justify-self: center;
+  margin-bottom: 35px;
 }
 #vehicle-info h2{
   margin-top: 0px;

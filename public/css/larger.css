@@ -102,6 +102,7 @@
     }
     #vehicle-info img {
         grid-row: 1/7;
+        margin-bottom: 0px;
       }
     #vehicle-info h2, #vehicle-info span, #vehicle-info p {
         grid-column: 2/3;
