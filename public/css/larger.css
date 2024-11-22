@@ -95,16 +95,16 @@
         margin-bottom: 10px;
     }
     /* vehicle page elements */
-    #vehicle-info {
+    #vehicle-section #info {
         grid-template-columns: 1fr 2fr;
         grid-template-rows: repeat(6, auto);
         column-gap: 25px;
     }
-    #vehicle-info img {
+    #vehicle-section #info img {
         grid-row: 1/7;
         margin-bottom: 0px;
       }
-    #vehicle-info h2, #vehicle-info span, #vehicle-info p {
+    #vehicle-section #info h2, #vehicle-section #info span, #vehicle-section #info p {
         grid-column: 2/3;
     }
   }

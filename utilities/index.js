@@ -40,7 +40,7 @@ Util.buildClassificationGrid = async function(data){
         +'"></a>'
         grid += '<div class="namePrice">'
         grid += '<h2>'
-        grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
+        grid += '<a href="../../inv/detail/' + vehicle.inv_id +'/#info" title="View ' 
         + vehicle.inv_year + ' ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details" target="_top">' 
         + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
         grid += '</h2>'
@@ -62,7 +62,7 @@ Util.buildClassificationGrid = async function(data){
 Util.buildVehicleInformation = async function(info) {
   let wrap
   if (info.length > 0) {
-    wrap = '<div id="vehicle-info">'
+    wrap = '<div id="info">'
     wrap += `<img loading="lazy" src="${info[0].inv_image}" alt="${info[0].inv_year} ${info[0].inv_make} ${info[0].inv_model}">`
     wrap += `<h2>${info[0].inv_make} ${info[0].inv_model} Details</h2>`
     wrap += `<p>${info[0].inv_description}</p>`

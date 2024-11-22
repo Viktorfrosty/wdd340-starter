@@ -31,7 +31,7 @@ body {
 header a, p, h1, h2, h3 {
   color: var(--color-accent2);
 }
-nav a, a, h1, h2, h3, #vehicle-info span {
+nav a, a, h1, h2, h3, #vehicle-section #info span {
   font-family: var(--main-fonts);
 }
 p {
@@ -228,27 +228,27 @@ footer p {
   padding: 5px 5px 20px 5px;
 }
 /** vehicle page elements **/
-#vehicle-info {
+#vehicle-section #info {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: repeat(7, auto);
   padding: 10px;
 }
-#vehicle-info span {
+#vehicle-section #info span {
   font-weight: bold;
   padding-bottom: 10px;
 }
-#vehicle-info img {
+#vehicle-section #info img {
   grid-row: 1/2;
   border-radius: 15px;
   width: 100%;
   justify-self: center;
   margin-bottom: 35px;
 }
-#vehicle-info h2{
+#vehicle-section #info h2{
   margin-top: 0px;
 }
-#vehicle-info img,
-#vehicle-info h2, #vehicle-info span, #vehicle-info p {
+#vehicle-section #info img,
+#vehicle-section #info h2, #vehicle-section #info span, #vehicle-section #info p {
   grid-column: 1/2;
 }
