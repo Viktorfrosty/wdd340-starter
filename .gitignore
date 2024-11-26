@@ -23,3 +23,6 @@ pnpm-lock.yaml
 
 # Extra: ignore .vscode
 .vscode/
+
+# Extra: ignore SQLTools
+render.session.sql

@@ -263,3 +263,6 @@ SET
 -- DROP TABLE IF EXISTS public.classification CASCADE;
 -- DROP TABLE IF EXISTS public.inventory;
 -- DROP TYPE IF EXISTS public.account_type;
+
+-- DELETE FROM public.account WHERE account_id = 1;
+-- ALTER SEQUENCE account_account_id_seq RESTART WITH 1;
