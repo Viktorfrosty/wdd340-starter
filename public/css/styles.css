@@ -252,3 +252,39 @@ footer p {
 #vehicle-section #info h2, #vehicle-section #info span, #vehicle-section #info p {
   grid-column: 1/2;
 }
+form {
+  background-color: var(--color-main);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border: 5px solid var(--color-accent2);
+  width: 90%;
+  padding: 15px 25px;
+  gap: 0px;
+}
+form label {
+  margin-bottom: -10px;
+}
+form, form input {
+  border-radius: 15px;
+}
+form input {
+  padding: 5px 10px;
+}
+form input[type="submit"] {
+  width: 100px;
+  margin-bottom: 15px;
+}
+form input[type="submit"], form #registration {
+  margin-top: 10px;
+  align-self: center;
+}
+form label, form p, form p a, form li {
+  color: var(--color-accent1);
+}
+form label, form p, form p a, form input, form li {
+  font-family: var(--main-fonts);
+}
+form ul {
+  margin-top: -5px;
+}

@@ -1,0 +1,26 @@
+<%- messages() %>
+
+<section class="frame">
+
+    <h1><%= title %></h1>
+
+    <form action="" method="post">
+        <label for="account_firstname">First Name</label><br>
+        <input type="text" id="account_firstname" name="account_firstname" placeholder="Jhon" required><br>
+        <label for="account_lastname">Last Name</label><br>
+        <input type="text" id="account_lastname" name="account_lastname" placeholder="Doe" required><br>
+        <label for="account_email">Email</label><br>
+        <input type="email" id="account_email" name="account_email" placeholder="your@email.com" required><br>
+        <p>Password must contain:</p>
+        <ul>
+            <li>12 characters in length, minimum.</li>
+            <li>at least 1 capital letter.</li>
+            <li>at least 1 number.</li>
+            <li>at least 1 special character.</li>
+        </ul>
+        <label for="account_password">Password</label><br>
+        <input type="password" id="account_password" name="account_password" required><br>
+        <input type="submit" value="register">
+    </form>
+
+</section>
