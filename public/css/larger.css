@@ -46,7 +46,7 @@
         margin-left: 6%;
     }
     .reviews, .upgrades {
-        grid-row: 3/4;
+        grid-row: 4/5;
     }
     #main-grid {
         margin-bottom: 25px;

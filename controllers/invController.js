@@ -11,6 +11,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message in the clasiffication view.")
   const className = data[0].classification_name
   res.render("./inventory/classification", {
     title: className + " vehicles",
@@ -27,6 +28,7 @@ invCont.buildByVehicleInfo = async function (req, res, next) {
   const info = await invModel.getVehicleInfoByInventoryId(inv_id)
   const wrap = await utilities.buildVehicleInformation(info)
   let nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message in the vehicle view.")
   const title = `${info[0].inv_make} ${info[0].inv_model}`
   const year = `${info[0].inv_year}`
   res.render("./vehicles/vehicle", {
