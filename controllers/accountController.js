@@ -11,6 +11,7 @@ async function buildLogin(req, res, next) {
   res.render("account/login", {
     title: "Login",
     nav,
+    errors: null,
   })
 }
 
@@ -21,8 +22,9 @@ async function buildRegister(req, res, next) {
   let nav = await utilities.getNav()
   // req.flash("notice", "This is a flash message in the register view.")
   res.render("account/register", {
-    title: "Register",
+    title: "Registration",
     nav,
+    errors: null,
   })
 }
 
@@ -37,7 +39,7 @@ async function registerAccount(req, res) {
   let hashedPassword
   try {
     // regular password and cost (salt is generated automatically)
-    hashedPassword = await bcrypt.hashSync(account_password, 10)
+    hashedPassword = await bcrypt.hashSync(account_password, 100)
   } catch (error) {
     req.flash("notice", 'Sorry, there was an error processing the registration.')
     res.status(500).render("account/register", {
@@ -62,14 +64,48 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
+      errors: null,
     })
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount }
+// team activity #2 week 04
+/* ****************************************
+*  Process login
+* *************************************** */
+async function registerLogin(req, res) {
+  let nav = await utilities.getNav()
+  const { account_email, account_password } = req.body
+  const regResult = await accModel.registerLogin(
+    account_email,
+    // hashedPassword
+    account_password
+  )
+  if (regResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you\'re logged in ${account_firstname}.`
+    )
+    res.status(201).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the login failed.")
+    res.status(501).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, registerLogin }

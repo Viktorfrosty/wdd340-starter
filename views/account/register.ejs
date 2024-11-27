@@ -4,16 +4,24 @@
 
     <%- messages() %>
 
+    <% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+    <% } %>
+
     <form action="/account/register" method="post">
 
         <label for="account_firstname">First Name</label><br>
-        <input type="text" id="account_firstname" name="account_firstname" placeholder="Jhon" required><br>
+        <input type="text" id="account_firstname" name="account_firstname" placeholder="Jhon" required value="<%= locals.account_firstname %>"><br>
 
         <label for="account_lastname">Last Name</label><br>
-        <input type="text" id="account_lastname" name="account_lastname" placeholder="Doe" required><br>
+        <input type="text" id="account_lastname" name="account_lastname" placeholder="Doe" required value="<%= locals.account_lastname %>"><br>
 
         <label for="account_email">Email</label><br>
-        <input type="email" id="account_email" name="account_email" placeholder="your@email.com" required><br>
+        <input type="email" id="account_email" name="account_email" placeholder="your@email.com" required value="<%= locals.account_email %>"><br>
 
         <label for="account_password">
             <p>Password must contain:</p>

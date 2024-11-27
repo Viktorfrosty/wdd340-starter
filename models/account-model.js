@@ -12,7 +12,6 @@ async function registerAccount(account_firstname, account_lastname, account_emai
     }
   }
 
-// team activity #1 week 04
 /* **********************
  *   Check for existing email
  * ********************* */
@@ -25,7 +24,5 @@ async function checkExistingEmail(account_email){
     return error.message
   }
 }
-//
 
-// module.exports = { registerAccount }
-module.exports = { registerAccount, checkExistingEmail } // team activity #1 week 04
+module.exports = { registerAccount, checkExistingEmail }
