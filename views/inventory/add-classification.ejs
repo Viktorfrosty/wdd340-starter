@@ -1,0 +1,20 @@
+<section class="frame">
+
+    <h1>
+        <%= title %>
+    </h1>
+
+    <%- messages() %>
+
+    <form action="/inv/add-classification" method="post">
+
+        <label for="classification_name">
+            Classification Name
+        </label><br>
+        <input type="text" id="classification_name" name="classification_name" pattern="^[A-Za-z]+$" required value="<%= locals.classification_name %>"><br>
+
+        <input type="submit" value="Create Classification">
+
+    </form>
+
+</section>

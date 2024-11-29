@@ -273,6 +273,7 @@ form {
   width: 90%;
   padding: 15px 25px;
   gap: 0px;
+  margin-bottom: 25px;
 }
 form label {
   margin-bottom: -10px;
@@ -299,4 +300,16 @@ form label, form p, form p a, form input, form li {
 }
 form ul {
   margin-top: -5px;
+}
+/* Management page */
+#management-links{
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+  margin-bottom: 50px;
+  gap: 10px;
+}
+/* add classification view */
+form input[value="Create Classification"] {
+  width: 175px;
 }

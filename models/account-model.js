@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs") // team activity #2 week 04
 const pool = require("../database/")
 
 /* *****************************
@@ -10,6 +11,27 @@ async function registerAccount(account_firstname, account_lastname, account_emai
     } catch (error) {
       return error.message
     }
+  }
+
+/* *****************************
+*   Register login
+* *************************** */
+async function registerLogin(account_email, account_password) { 
+  try { const sql = "SELECT * FROM account WHERE account_email = $1"; 
+    const result = await pool.query(sql, [account_email]); 
+    if (result.rows.length > 0) { 
+      const user = result.rows[0];
+      const match = await bcrypt.compare(account_password, user.account_password);
+      if (match) { 
+        return true;
+      } else { 
+        return false;
+      } 
+      }
+    } catch (error) { 
+      console.log(error)
+      return error.message; 
+    } 
   }
 
 /* **********************
@@ -25,4 +47,4 @@ async function checkExistingEmail(account_email){
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail }
+module.exports = { registerAccount, checkExistingEmail, registerLogin }

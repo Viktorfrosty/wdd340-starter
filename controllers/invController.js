@@ -39,4 +39,22 @@ invCont.buildByVehicleInfo = async function (req, res, next) {
   })
 }
 
+invCont.buildManagement = async function (req, res) {
+  const nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message in the Vehicle Management view.")
+  res.render("./inventory/management", {title: "Vehicle Management", nav})
+}
+
+invCont.buildManagementAddClassification = async function (req, res, next) {
+  const nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message in the add classification view.")
+  res.render("./inventory/add-classification", {title: "Add Classification", nav})
+}
+
+invCont.buildManagementAddInventory = async function (req, res, next) {
+  const nav = await utilities.getNav()
+  req.flash("notice", "This is a flash message in the add inventory view.")
+  res.render("./inventory/add-inventory", {title: "Add Inventory", nav})
+}
+
 module.exports = invCont

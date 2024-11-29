@@ -14,21 +14,21 @@ router.get("/register", utilities.handleErrors(accController.buildRegister))
 
 // Process the registration data
 router.post(
-    "/register",
-    regValidate.registationRules(),
-    regValidate.checkRegData,
-    utilities.handleErrors(accController.registerAccount)
+  "/register",
+  regValidate.registationRules(),
+  regValidate.checkRegData,
+  utilities.handleErrors(accController.registerAccount)
 )
 
 // Process the login attempt
 router.post(
-    "/login",
-    // (req, res) => {
-    //   res.status(200).send('login process')
-    // },
-    regValidate.loginRules(),
-    regValidate.checkLoginData,
-    utilities.handleErrors(baseController.buildHome)
-  )
+  "/login",
+  // (req, res) => {
+  //   res.status(200).send('login process')
+  // },
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accController.registerLogin)
+)
 
 module.exports = router

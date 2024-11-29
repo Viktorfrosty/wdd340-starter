@@ -43,4 +43,21 @@ async function getVehicleInfoByInventoryId(inv_id) {
   }
 }
 
+/* ***************************
+ *  Post new classification element in the server
+ * ************************** */
+async function registerClassificationElement(classification_name) {
+  try {
+    const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+    return await pool.query(sql, [classification_name])
+  } catch (error) {
+    console.error("registerClassificationElement error " + error)
+  }
+}
+
+/* ***************************
+ *  Post new inventory element in the server
+ * ************************** */
+
+
 module.exports = {getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId}
