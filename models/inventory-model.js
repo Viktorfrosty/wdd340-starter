@@ -60,4 +60,4 @@ async function registerClassificationElement(classification_name) {
  * ************************** */
 
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId}
+module.exports = {getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement}
