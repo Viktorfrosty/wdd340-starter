@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs") // team activity #2 week 04
+const bcrypt = require("bcryptjs")
 const pool = require("../database/")
 
 /* *****************************

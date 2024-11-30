@@ -59,5 +59,18 @@ async function registerClassificationElement(classification_name) {
  *  Post new inventory element in the server
  * ************************** */
 
+/* ***************************
+ *  Post new inventory element in the server
+ * ************************** */
+async function checkExistingClassification(classification_name) {
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1"
+    const classification = await pool.query(sql, [classification_name])
+    console.log(classification)
+    return classification.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement}
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification }

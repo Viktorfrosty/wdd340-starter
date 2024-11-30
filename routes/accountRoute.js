@@ -5,7 +5,6 @@ const router = new express.Router()
 const accController = require("../controllers/accountController")
 const utilities = require('../utilities');
 
-const baseController = require("../controllers/baseController")
 // Route to build login
 router.get("/login", utilities.handleErrors(accController.buildLogin))
 

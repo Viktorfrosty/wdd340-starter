@@ -9,7 +9,12 @@
     <form action="/inv/add-classification" method="post">
 
         <label for="classification_name">
-            Classification Name
+            <p>Classification Name</p>
+            <ul>
+                <li>Only alphabetic characters allowed.</li>
+                <li>Lower case and uppercase are allowed.</li>
+                <li>numbers, spaces and special characters are not allowed.</li>
+            </ul>
         </label><br>
         <input type="text" id="classification_name" name="classification_name" pattern="^[A-Za-z]+$" required value="<%= locals.classification_name %>"><br>
 

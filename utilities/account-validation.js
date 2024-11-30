@@ -1,7 +1,7 @@
-const accountModel = require("../models/account-model") // team activity #1 week 04
+const accountModel = require("../models/account-model")
 const utilities = require(".")
-  const { body, validationResult } = require("express-validator")
-  const validate = {}
+const { body, validationResult } = require("express-validator")
+const validate = {}
 
 /*  **********************************
   *  Registration Data Validation Rules
@@ -113,7 +113,6 @@ validate.checkRegData = async (req, res, next) => {
  * Check data and return errors or continue to login
  * ***************************** */
 validate.checkLoginData = async (req, res, next) => {
-  const { account_email } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -122,7 +121,6 @@ validate.checkLoginData = async (req, res, next) => {
       errors,
       title: "login",
       nav,
-      account_email,
     })
     return
   }
