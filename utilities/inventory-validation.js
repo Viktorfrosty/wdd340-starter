@@ -30,8 +30,7 @@ validate.addInventoryElementRules = () => {
             .notEmpty(),
         body("inv_make")
             .notEmpty(),
-        body("classificationList")
-            .notEmpty()
+        body("classification_id")
             .isInt()
             .notEmpty(),
         body("inv_year")
@@ -77,9 +76,12 @@ validate.checkClassificationRegData = async (req, res, next) => {
  * Check data and return errors or continue to inventory registration
  * ***************************** */
 validate.checkInventoryRegData = async (req, res, next) => {
+    console.log(req.body)
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
+        console.log("fucked up")
+        console.log(errors)
       let nav = await utilities.getNav()
       const typeSelector = await utilities.buildClassificationList()
       res.render("./inventory/add-inventory", {

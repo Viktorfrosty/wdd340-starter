@@ -79,7 +79,7 @@ async function checkExistingClassification(classification_name) {
  * ************************** */
 async function registerInventoryElement(inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail) {
   try {
-    const sql = "INSERT INTO inventory (inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$ 10) RETURNING *"
+    const sql = "INSERT INTO inventory (inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
     return await pool.query(sql, [inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail])
   } catch (error) {
     console.error("registerClassificationElement error " + error.message)

@@ -111,9 +111,9 @@ invCont.registerNewClassificationElement = async function (req, res, next) {
  * ************************** */
 invCont.registerNewInventoryElement = async function (req, res, next) {
   const nav = await utilities.getNav()
-  const { inv_model, inv_make, classificationList, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail } = req.body
+  const { inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail } = req.body
   const addResult = await invModel.registerInventoryElement(
-    inv_model, inv_make, classificationList, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail
+    inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail
   )
   if (addResult) {
     req.flash(
