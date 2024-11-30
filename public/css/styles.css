@@ -12,6 +12,8 @@
   --color-secondary: #4c4b4b;
   --color-accent1: white;
   --color-accent2: black;
+  --color-special1: #A80000;
+  --color-special2: #455926;
 }
 body {
   box-sizing: border-box;
@@ -98,8 +100,20 @@ footer p {
   font-size: 1rem;
   font-weight: bold;
   font-style: italic;
-  color: #A80000;
+  color: var(--color-special1);
 }
+.touched:valid {
+  background-color: var(--color-special2);
+  color: var(--color-accent1);
+}
+.touched:invalid {
+  background-color: var(--color-special1);
+  color: var(--color-accent1);
+}
+.touched:invalid::placeholder {
+  color: var(--color-accent1);
+}
+
 /*** Error page elements ***/
 #error-ttl {
   grid-row: 1/2;

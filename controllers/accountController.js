@@ -89,8 +89,8 @@ async function registerLogin(req, res, next) {
       "notice",
       `Congratulations, you're logged in.`
     )
-    res.status(201).render("account/login", {
-      title: "Login",
+    res.status(201).render("index", {
+      title: "Home",
       nav,
       errors: null,
     })

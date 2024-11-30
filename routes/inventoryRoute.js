@@ -17,7 +17,7 @@ router.get("/", utilities.handleErrors(invController.buildManagement))
 // Route to build add classification
 router.get("/add-classification", utilities.handleErrors(invController.buildManagementAddClassification))
 
-// Route to build add classification
+// Route to build add inventory
 router.get("/add-inventory", utilities.handleErrors(invController.buildManagementAddInventory))
 
 // Process the add classification form
@@ -26,6 +26,14 @@ router.post(
     invValidate.addClassificationElementRules(),
     invValidate.checkClassificationRegData,
     utilities.handleErrors(invController.registerNewClassificationElement)
+)
+
+// Process the add inventory form
+router.post(
+    "/add-inventory",
+    invValidate.addInventoryElementRules(),
+    invValidate.checkInventoryRegData,
+    utilities.handleErrors(invController.registerNewInventoryElement)
 )
 
 module.exports = router

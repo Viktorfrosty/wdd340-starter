@@ -51,26 +51,43 @@ async function registerClassificationElement(classification_name) {
     const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
     return await pool.query(sql, [classification_name])
   } catch (error) {
-    console.error("registerClassificationElement error " + error)
+    console.error("registerClassificationElement error " + error.message)
   }
 }
 
 /* ***************************
- *  Post new inventory element in the server
+ *  check new classification element in the server
  * ************************** */
+function capitalize(str) { 
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase(); 
+}  
 
-/* ***************************
- *  Post new inventory element in the server
- * ************************** */
-async function checkExistingClassification(classification_name) {
+async function checkExistingClassification(classification_name) { 
   try {
     const sql = "SELECT * FROM classification WHERE classification_name = $1"
-    const classification = await pool.query(sql, [classification_name])
-    console.log(classification)
-    return classification.rowCount
+    const classification1 = await pool.query(sql, [classification_name.toLowerCase()])
+    const classification2 = await pool.query(sql, [classification_name.toUpperCase()])
+    const classification3 = await pool.query(sql, [capitalize(classification_name)])
+    return classification1.rowCount + classification2.rowCount + classification3.rowCount
+  } catch (error) { 
+    console.error("checkExistingClassification error " + error.message);
+  } 
+}
+
+/* ***************************
+ *  Post new inventory element in the server
+ * ************************** */
+async function registerInventoryElement(inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail) {
+  try {
+    const sql = "INSERT INTO inventory (inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$ 10) RETURNING *"
+    return await pool.query(sql, [inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail])
   } catch (error) {
-    return error.message
+    console.error("registerClassificationElement error " + error.message)
   }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification }
+/* ***************************
+ *  check new inventory element in the server
+ * ************************** */
+
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification, registerInventoryElement }

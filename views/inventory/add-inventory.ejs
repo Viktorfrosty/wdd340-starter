@@ -6,12 +6,62 @@
 
     <%- messages() %>
 
+    <% if (errors) { %>
+        <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <%  }) %>
+        </ul>
+        <% } %>
+
     <form action="/inv/add-inventory" method="post">
 
-        <label for="classification_name">
-            Classification Name
+        <label for="inv_model">
+            Model
         </label><br>
-        <input type="text" id="classification_name" name="classification_name" pattern="^[A-Za-z]+$" required value="<%= locals.classification_name %>"><br>
+        <input type="text" id="inv_model" name="inv_model" pattern="" required value="<%= locals.inv_model %>"><br>
+
+        <label for="inv_make">
+            Maker
+        </label><br>
+        <input type="text" id="inv_make" name="inv_make" pattern="" required value="<%= locals.inv_make %>"><br>
+
+        <%- typeSelector %>
+
+        <label for="inv_year">
+            Year
+        </label><br>
+        <input type="number" id="inv_year" name="inv_year" min="4" max="4" required value="<%= locals.inv_year %>"><br>
+
+        <label for="inv_year">
+            Price
+        </label><br>
+        <input type="number" id="inv_price" name="inv_price" required value="<%= locals.inv_price %>"><br>
+
+        <label for="inv_miles">
+            Miles
+        </label><br>
+        <input type="number" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles %>"><br>
+
+        <label for="inv_color">
+            Color
+        </label><br>
+        <input type="text" id="inv_color" name="inv_color" pattern="" required value="<%= locals.inv_color %>"><br>
+
+        <label for="inv_description">
+            Description
+        </label><br>
+        <textarea name="message" id="inv_description" name="inv_description" pattern="" required value="<%= locals.inv_description %>"></textarea><br>
+
+        <label for="inv_image">
+            Image
+        </label><br>
+        <input type="text" id="inv_image" name="inv_image" required readonly value="/images/vehicles/no-image.png"><br>
+
+        <label for="inv_thumbnail">
+            Thumbnail
+        </label><br>
+        <input type="text" id="inv_thumbnail" name="inv_thumbnail" required readonly value="/images/vehicles/no-image-tn.png"><br>
 
         <input type="submit" value="Create Classification">
 
