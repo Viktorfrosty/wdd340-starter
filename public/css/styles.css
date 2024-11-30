@@ -279,11 +279,11 @@ footer p {
   grid-column: 1/2;
 }
 form {
+  box-shadow: 15px 15px 5px var(--color-accent2);
   background-color: var(--color-main);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  border: 5px solid var(--color-accent2);
   width: 90%;
   padding: 15px 25px;
   gap: 0px;
@@ -292,10 +292,23 @@ form {
 form label {
   margin-bottom: -10px;
 }
-form, form input {
+form #inv_description {
+  height: 125px;
+}
+form select {
+  margin-top: -17px;
+  margin-bottom: 17px;
+}
+form, form select, form #inv_description {
+  border-width: 2px;
+  border-style: inset;
+  border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+}
+form, form input, form select, form #inv_description {
   border-radius: 15px;
 }
-form input {
+form input, form select, form #inv_description {
   padding: 5px 10px;
 }
 form input[type="submit"] {
@@ -309,8 +322,11 @@ form input[type="submit"], form #registration {
 form label, form p, form p a, form li {
   color: var(--color-accent1);
 }
-form label, form p, form p a, form input, form li {
+form label, form p, form p a, form input, form li, form select {
   font-family: var(--main-fonts);
+}
+form textarea {
+  font-family: var(--secondary-fonts);
 }
 form ul {
   margin-top: -5px;

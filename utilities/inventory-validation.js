@@ -10,8 +10,9 @@ validate.addClassificationElementRules = () => {
     return [
         body("classification_name")
             .isAlpha()
-            .withMessage("Please provide a valid name.") // on error this message is sent.
+            .withMessage("Please provide a valid classification name.")
             .notEmpty()
+            .withMessage("Please provide a classification name.")
             .custom(async (classification_name) => {
                 const classExists = await inventoryModel.checkExistingClassification(classification_name)
                 if (classExists){
@@ -24,34 +25,65 @@ validate.addClassificationElementRules = () => {
 /*  **********************************
 *  Inventory Data Validation Rules
 * ********************************* */
-validate.addInventoryElementRules = () => {
-    return [
-        body("inv_model")
-            .notEmpty(),
-        body("inv_make")
-            .notEmpty(),
-        body("classification_id")
-            .isInt()
-            .notEmpty(),
-        body("inv_year")
-            .isInt()
-            .notEmpty(),
-        body("inv_price")
-            .isInt()
-            .notEmpty(),
-        body("inv_miles")
-            .isInt()
-            .notEmpty(),
-        body("inv_color")
-            .isAlpha()
-            .notEmpty(),
-        body("inv_description")
-            .notEmpty(),
-        body("inv_image")
-            .notEmpty(),
-        body("inv_thumbnail")
-            .notEmpty()
-    ]
+validate.addInventoryElementRules = () => { 
+    return [ 
+        body("inv_model") 
+            .matches(/^[A-Z0-9][A-Za-z0-9\s]*$/) 
+            .withMessage('Model must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.') 
+            .notEmpty() 
+            .withMessage('Model is required.'), 
+        body("inv_make") 
+            .matches(/^[A-Z0-9][a-zA-Z0-9\s]*$/) 
+            .withMessage('Maker must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.') 
+            .notEmpty() 
+            .withMessage('Maker is required.'), 
+        body("classification_id") 
+            .isInt() 
+            .withMessage('Classification ID must be an integer.') 
+            .notEmpty() 
+            .withMessage('Classification ID is required.'), 
+        body("inv_year") 
+            .matches(/^[0-9]{4}$/) 
+            .withMessage('Year must be a 4-digit number.') 
+            .isInt() 
+            .withMessage('Year must be an integer.') 
+            .notEmpty() 
+            .withMessage('Year is required.'), 
+        body("inv_price") 
+            .matches(/^[0-9]{1,}$/) 
+            .withMessage('Price must be a number.') 
+            .isInt() 
+            .withMessage('Price must be an integer.') 
+            .notEmpty() 
+            .withMessage('Price is required.'), 
+        body("inv_miles") 
+            .matches(/^[0-9]{1,}$/) 
+            .withMessage('Miles must be a number.') 
+            .isInt() 
+            .withMessage('Miles must be an integer.') 
+            .notEmpty() 
+            .withMessage('Miles is required.'), 
+        body("inv_color") 
+            .matches(/^[A-Z][a-zA-Z]*$/) 
+            .withMessage('Color must start with an uppercase letter or digit and can contain alphanumeric characters.') 
+            .notEmpty() 
+            .withMessage('Color is required.'), 
+        body("inv_description") 
+            .matches(/^[A-Z0-9][A-Za-z0-9\s]*$/) 
+            .withMessage('Description must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.') 
+            .notEmpty() 
+            .withMessage('Description is required.'), 
+        body("inv_image") 
+            .matches(/^[a-zA-Z0-9/._-]+$/) 
+            .withMessage('Image must be a valid path with allowed characters.') 
+            .notEmpty() 
+            .withMessage('Image is required.'), 
+        body("inv_thumbnail") 
+            .matches(/^[a-zA-Z0-9/._-]+$/) 
+            .withMessage('Thumbnail must be a valid path with allowed characters.') 
+            .notEmpty() 
+            .withMessage('Thumbnail is required.')
+    ];
 }
 
 /* ******************************
