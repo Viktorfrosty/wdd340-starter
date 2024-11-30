@@ -26,16 +26,32 @@ validate.addClassificationElementRules = () => {
 * ********************************* */
 validate.addInventoryElementRules = () => {
     return [
-        body("inv_model"),
-        body("inv_make"),
-        body("classificationList"),
-        body("inv_year"),
-        body("inv_price"),
-        body("inv_miles"),
-        body("inv_color"),
-        body("inv_description"),
-        body("inv_image"),
+        body("inv_model")
+            .notEmpty(),
+        body("inv_make")
+            .notEmpty(),
+        body("classificationList")
+            .notEmpty()
+            .isInt()
+            .notEmpty(),
+        body("inv_year")
+            .isInt()
+            .notEmpty(),
+        body("inv_price")
+            .isInt()
+            .notEmpty(),
+        body("inv_miles")
+            .isInt()
+            .notEmpty(),
+        body("inv_color")
+            .isAlpha()
+            .notEmpty(),
+        body("inv_description")
+            .notEmpty(),
+        body("inv_image")
+            .notEmpty(),
         body("inv_thumbnail")
+            .notEmpty()
     ]
 }
 

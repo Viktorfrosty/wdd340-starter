@@ -86,8 +86,4 @@ async function registerInventoryElement(inv_model, inv_make, classification_id, 
   }
 }
 
-/* ***************************
- *  check new inventory element in the server
- * ************************** */
-
 module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification, registerInventoryElement }

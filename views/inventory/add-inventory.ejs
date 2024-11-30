@@ -31,17 +31,17 @@
         <label for="inv_year">
             Year
         </label><br>
-        <input type="number" id="inv_year" name="inv_year" min="4" max="4" required value="<%= locals.inv_year %>"><br>
+        <input type="text" id="inv_year" name="inv_year" pattern="^[0-9]{4}$" required value="<%= locals.inv_year %>"><br>
 
-        <label for="inv_year">
+        <label for="inv_price">
             Price
         </label><br>
-        <input type="number" id="inv_price" name="inv_price" required value="<%= locals.inv_price %>"><br>
+        <input type="text" id="inv_price" name="inv_price" pattern="^[0-9]{+}$" required value="<%= locals.inv_price %>"><br>
 
         <label for="inv_miles">
             Miles
         </label><br>
-        <input type="number" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles %>"><br>
+        <input type="text" id="inv_miles" name="inv_miles" pattern="^[0-9]{+}$" required value="<%= locals.inv_miles %>"><br>
 
         <label for="inv_color">
             Color
