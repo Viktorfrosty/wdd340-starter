@@ -9,7 +9,7 @@ const validate = {}
 validate.addClassificationElementRules = () => {
     return [
         body("classification_name")
-            .isAlpha()
+            .matches(/^[A-Z][A-Za-z]*$/)
             .withMessage("Please provide a valid classification name.")
             .notEmpty()
             .withMessage("Please provide a classification name.")
@@ -108,12 +108,9 @@ validate.checkClassificationRegData = async (req, res, next) => {
  * Check data and return errors or continue to inventory registration
  * ***************************** */
 validate.checkInventoryRegData = async (req, res, next) => {
-    console.log(req.body)
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
-        console.log("fucked up")
-        console.log(errors)
       let nav = await utilities.getNav()
       const typeSelector = await utilities.buildClassificationList()
       res.render("./inventory/add-inventory", {

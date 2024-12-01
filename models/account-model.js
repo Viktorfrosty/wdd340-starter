@@ -29,7 +29,6 @@ async function registerLogin(account_email, account_password) {
       } 
       }
     } catch (error) { 
-      console.log(error)
       return error.message; 
     } 
   }
