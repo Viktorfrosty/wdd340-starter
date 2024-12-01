@@ -37,35 +37,27 @@ validate.addInventoryElementRules = () => {
             .withMessage('Maker must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.') 
             .notEmpty() 
             .withMessage('Maker is required.'), 
-        body("classification_id") 
-            .isInt() 
-            .withMessage('Classification ID must be an integer.') 
+        body("classification_id")
             .notEmpty() 
-            .withMessage('Classification ID is required.'), 
+            .withMessage('Classification ID is required.'),
         body("inv_year") 
             .matches(/^[0-9]{4}$/) 
             .withMessage('Year must be a 4-digit number.') 
-            .isInt() 
-            .withMessage('Year must be an integer.') 
             .notEmpty() 
             .withMessage('Year is required.'), 
         body("inv_price") 
             .matches(/^[0-9]{1,}$/) 
-            .withMessage('Price must be a number.') 
-            .isInt() 
-            .withMessage('Price must be an integer.') 
+            .withMessage('Price must be a number.')
             .notEmpty() 
             .withMessage('Price is required.'), 
         body("inv_miles") 
             .matches(/^[0-9]{1,}$/) 
             .withMessage('Miles must be a number.') 
-            .isInt() 
-            .withMessage('Miles must be an integer.') 
             .notEmpty() 
             .withMessage('Miles is required.'), 
         body("inv_color") 
             .matches(/^[A-Z][a-zA-Z]*$/) 
-            .withMessage('Color must start with an uppercase letter or digit and can contain alphanumeric characters.') 
+            .withMessage('Color must start with an uppercase letter and contain only alphabetical characters.') 
             .notEmpty() 
             .withMessage('Color is required.'), 
         body("inv_description") 
@@ -90,6 +82,7 @@ validate.addInventoryElementRules = () => {
  * Check data and return errors or continue to classification registration
  * ***************************** */
 validate.checkClassificationRegData = async (req, res, next) => {
+    const { classification_name } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -98,6 +91,7 @@ validate.checkClassificationRegData = async (req, res, next) => {
         errors,
         title: "Add Classification",
         nav,
+        classification_name,
       })
       return
     }
@@ -108,16 +102,26 @@ validate.checkClassificationRegData = async (req, res, next) => {
  * Check data and return errors or continue to inventory registration
  * ***************************** */
 validate.checkInventoryRegData = async (req, res, next) => {
+    const { inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      const typeSelector = await utilities.buildClassificationList()
+      const typeSelector = await utilities.buildClassificationList(classification_id)
       res.render("./inventory/add-inventory", {
         errors,
         title: "Add Inventory",
         typeSelector,
-        nav,
+        nav, 
+        inv_model, 
+        inv_make, 
+        inv_year, 
+        inv_price, 
+        inv_miles, 
+        inv_color, 
+        inv_description, 
+        inv_image, 
+        inv_thumbnail,
       })
       return
     }
