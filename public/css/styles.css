@@ -93,10 +93,10 @@ footer p {
 #tools, nav a {
   font-size: 0.75rem;
 }
-#messages {
+.notice {
   margin-bottom: 25px;
 }
-#messages li {
+.notice li {
   font-size: 1rem;
   font-weight: bold;
   font-style: italic;
@@ -296,13 +296,13 @@ form #inv_description {
   height: 125px;
 }
 form select {
-  margin-top: -17px;
   margin-bottom: 17px;
 }
 form, form select, form #inv_description {
   border-width: 2px;
   border-style: inset;
-  border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  /* border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133)); */
+  border-color: rgb(118, 118, 118);
   border-image: initial;
 }
 form, form input, form select, form #inv_description {

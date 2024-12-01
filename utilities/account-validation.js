@@ -13,6 +13,9 @@ validate.registationRules = () => {
         .trim()
         .escape()
         .notEmpty()
+        .withMessage("First name is required.") 
+        .matches(/^[A-Z][A-Za-z]*$/) 
+        .withMessage('First name must start with an uppercase letter and can contain only alphabetic characters.')
         .isLength({ min: 1 })
         .withMessage("Please provide a first name."), // on error this message is sent.
   
@@ -21,6 +24,9 @@ validate.registationRules = () => {
         .trim()
         .escape()
         .notEmpty()
+        .withMessage("Last name is required.") 
+        .matches(/^[A-Z][A-Za-z]*$/) 
+        .withMessage('Last name must start with an uppercase letter and can contain only alphabetic characters.')
         .isLength({ min: 2 })
         .withMessage("Please provide a last name."), // on error this message is sent.
   
@@ -28,21 +34,21 @@ validate.registationRules = () => {
       body("account_email")
         .trim()
         .isEmail()
+        .withMessage("A valid email is required.")
         .normalizeEmail() // refer to validator.js docs
         .withMessage("A valid email is required.")
-        // team activity #1 week 04
         .custom(async (account_email) => {
           const emailExists = await accountModel.checkExistingEmail(account_email)
           if (emailExists){
             throw new Error("Email exists. Please log in or use different email")
           }
         }),
-        //
   
       // password is required and must be strong password
       body("account_password")
         .trim()
         .notEmpty()
+        .withMessage("Password is required.")
         .isStrongPassword({
           minLength: 12,
           minLowercase: 1,
@@ -63,6 +69,7 @@ validate.loginRules = () => {
     body("account_email")
       .trim()
       .isEmail()
+      .withMessage("A valid email is required.") 
       .normalizeEmail() // refer to validator.js docs
       .withMessage("A valid email is required.")
       .custom(async (account_email) => {
@@ -76,6 +83,7 @@ validate.loginRules = () => {
     body("account_password")
       .trim()
       .notEmpty()
+      .withMessage("Password is required.")
       .isStrongPassword({
         minLength: 12,
         minLowercase: 1,
