@@ -340,6 +340,6 @@ form ul {
   gap: 10px;
 }
 /* add classification view */
-form input[value="Create Classification"] {
+form input[value="Create Classification"], form input[value="Update Vehicle"], form input[value="Delete Vehicle"] {
   width: 175px;
 }

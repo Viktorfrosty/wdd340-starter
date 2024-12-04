@@ -24,6 +24,9 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 
 router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
 
+// deleting process
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInventoryViem))
+
 // Process the add classification form
 router.post(
     "/add-classification",
@@ -44,6 +47,11 @@ router.post(
 router.post("/update/",
     invValidate.checkInventoryUpdateData,
      utilities.handleErrors(invController.updateInventory)
+)
+
+// deleting process
+router.post("/delete/", 
+    utilities.handleErrors(invController.deleteInventoryObject)
 )
 
 module.exports = router
