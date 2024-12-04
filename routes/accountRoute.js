@@ -11,6 +11,9 @@ router.get("/login", utilities.handleErrors(accController.buildLogin))
 // Route to build registration
 router.get("/register", utilities.handleErrors(accController.buildRegister))
 
+// Route to build management
+router.get("/", utilities.checkLogin, utilities.handleErrors(accController.buildAccManagement))
+
 // Process the registration data
 router.post(
   "/register",

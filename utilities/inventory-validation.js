@@ -61,8 +61,9 @@ validate.addInventoryElementRules = () => {
             .notEmpty() 
             .withMessage('Color is required.'), 
         body("inv_description") 
-            .matches(/^[A-Z0-9][A-Za-z0-9\s]*$/) 
-            .withMessage('Description must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.') 
+            .matches(/^[A-Z0-9][A-Za-z0-9\s\.\-\?]*$/)
+            // .matches(/^[A-Z0-9][A-Za-z0-9\s]*$/)
+            // .withMessage('Description must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.') 
             .notEmpty() 
             .withMessage('Description is required.'), 
         body("inv_image") 
@@ -122,6 +123,37 @@ validate.checkInventoryRegData = async (req, res, next) => {
         inv_description, 
         inv_image, 
         inv_thumbnail,
+      })
+      return
+    }
+    next()
+}
+
+/* ******************************
+ * Check data and return errors or continue to inventory update
+ * ***************************** */
+validate.checkInventoryUpdateData = async (req, res, next) => {
+    const { inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail, inv_id } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      const typeSelector = await utilities.buildClassificationList(classification_id)
+      res.render("./inventory/edit-inventory", {
+        errors,
+        title: `Edit ${inv_make} ${inv_model}`,
+        typeSelector,
+        nav, 
+        inv_model, 
+        inv_make, 
+        inv_year, 
+        inv_price, 
+        inv_miles, 
+        inv_color, 
+        inv_description, 
+        inv_image, 
+        inv_thumbnail,
+        inv_id
       })
       return
     }

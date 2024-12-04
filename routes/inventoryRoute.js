@@ -20,6 +20,10 @@ router.get("/add-classification", utilities.handleErrors(invController.buildMana
 // Route to build add inventory
 router.get("/add-inventory", utilities.handleErrors(invController.buildManagementAddInventory))
 
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
+
 // Process the add classification form
 router.post(
     "/add-classification",
@@ -34,6 +38,12 @@ router.post(
     invValidate.addInventoryElementRules(),
     invValidate.checkInventoryRegData,
     utilities.handleErrors(invController.registerNewInventoryElement)
+)
+
+// process the update
+router.post("/update/",
+    invValidate.checkInventoryUpdateData,
+     utilities.handleErrors(invController.updateInventory)
 )
 
 module.exports = router

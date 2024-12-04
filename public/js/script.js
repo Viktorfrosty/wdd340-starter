@@ -1,7 +1,8 @@
-const inputs = document.querySelectorAll('input[type="text"], textarea')
+const inputs = document.querySelectorAll('input[type="text"], input[type="password"], input[type="email"], textarea')
 const selects = document.querySelectorAll('select')
 const invDesc = document.getElementById('inv_description')
-const pattern = /^[A-Z0-9][A-Za-z0-9\s]*$/;
+// const pattern = /^[A-Z0-9][A-Za-z0-9\s]*$/;
+const pattern = /^[A-Z0-9][A-Za-z0-9\s\.\-\?]*$/;
 
 selects.forEach(select => {
     select.classList.toggle('touched', true);
