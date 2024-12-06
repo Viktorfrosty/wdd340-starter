@@ -11,7 +11,6 @@ invCont.buildByClassificationId = async function (req, res, next) {
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
-  // req.flash("notice", "This is a flash message in the clasiffication view.")
   const className = data[0].classification_name
   res.render("./inventory/classification", {
     title: className + " vehicles",
@@ -28,7 +27,6 @@ invCont.buildByVehicleInfo = async function (req, res, next) {
   const info = await invModel.getVehicleInfoByInventoryId(inv_id)
   const wrap = await utilities.buildVehicleInformation(info)
   let nav = await utilities.getNav()
-  // req.flash("notice", "This is a flash message in the vehicle view.")
   const title = `${info[0].inv_make} ${info[0].inv_model}`
   const year = `${info[0].inv_year}`
   res.render("./vehicles/vehicle", {
@@ -44,7 +42,6 @@ invCont.buildByVehicleInfo = async function (req, res, next) {
  * ************************** */
 invCont.buildManagement = async function (req, res) {
   const nav = await utilities.getNav()
-  // req.flash("notice", "This is a flash message in the Vehicle Management view.")
   const classificationSelect = await utilities.buildClassificationList()
   res.render("./inventory/management", {
     title: "Vehicle Management", 
@@ -58,7 +55,6 @@ invCont.buildManagement = async function (req, res) {
  * ************************** */
 invCont.buildManagementAddClassification = async function (req, res, next) {
   const nav = await utilities.getNav()
-  // req.flash("notice", "This is a flash message in the add classification view.")
   res.render("./inventory/add-classification", {
     title: "Add Classification",
     nav,
@@ -72,7 +68,6 @@ invCont.buildManagementAddClassification = async function (req, res, next) {
 invCont.buildManagementAddInventory = async function (req, res, next) {
   const nav = await utilities.getNav()
   const typeSelector = await utilities.buildClassificationList()
-  // req.flash("notice", "This is a flash message in the add inventory view.")
   res.render("./inventory/add-inventory", {
     title: "Add Inventory",
     nav,

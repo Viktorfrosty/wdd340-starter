@@ -9,7 +9,6 @@ const utilities = require("../utilities")
 * *************************************** */
 async function buildLogin(req, res, next) {
   let nav = await utilities.getNav()
-  // req.flash("notice", "This is a flash message in the login view.")
   res.render("account/login", {
     title: "Login",
     nav,
@@ -22,7 +21,6 @@ async function buildLogin(req, res, next) {
 * *************************************** */
 async function buildRegister(req, res, next) {
   let nav = await utilities.getNav()
-  // req.flash("notice", "This is a flash message in the register view.")
   res.render("account/register", {
     title: "Registration",
     nav,
@@ -49,7 +47,7 @@ async function registerAccount(req, res) {
       errors: null,
     })
   }
-  // 
+  //
   const regResult = await accModel.registerAccount(
     account_firstname,
     account_lastname,
@@ -79,33 +77,6 @@ async function registerAccount(req, res) {
 /* ****************************************
  *  Process login request
  * ************************************ */
-// async function registerLogin(req, res, next) {
-//   let nav = await utilities.getNav()
-//   const { account_email, account_password } = req.body
-//   const regResult = await accModel.registerLogin(
-//     account_email,
-//     account_password
-//   )
-//   if (regResult) {
-//     req.flash(
-//       "notice",
-//       `Congratulations, you're logged in.`
-//     )
-//     res.status(201).render("index", {
-//       title: "Home",
-//       nav,
-//       errors: null,
-//     })
-//   } else {
-//     req.flash("notice", "Sorry, the login failed.")
-//     res.status(501).render("account/login", {
-//       title: "Login",
-//       nav,
-//       errors: null,
-//     })
-//   }
-// }
-
 async function registerLogin(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
@@ -132,7 +103,7 @@ async function registerLogin(req, res) {
       return res.redirect("/account/")
     }
     else {
-      req.flash("message notice", "Please check your credentials and try again.")
+      req.flash("notice", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
         title: "Login",
         nav,
@@ -150,7 +121,6 @@ async function registerLogin(req, res) {
 * *************************************** */
 async function buildAccManagement(req, res, next) {
   let nav = await utilities.getNav()
-  // req.flash("notice", "This is a flash message in the account view.")
   res.render("account/", {
     title: "Account Management",
     nav,
@@ -158,5 +128,15 @@ async function buildAccManagement(req, res, next) {
   })
 }
 
+/* ****************************************
+*  Process logout
+* *************************************** */
+async function processLogout(req, res, next) {
+  let nav = await utilities.getNav()
+  res.clearCookie('jwt')
+  req.flash("notice","Logged out succesfully.")
+  res.redirect("/")
+}
 
-module.exports = { buildLogin, buildRegister, registerAccount, registerLogin, buildAccManagement }
+
+module.exports = { buildLogin, buildRegister, registerAccount, registerLogin, buildAccManagement, processLogout }

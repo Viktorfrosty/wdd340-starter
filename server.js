@@ -45,7 +45,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 // Cookie parser Middleware
-app.use(cookieParser())
+// app.use(cookieParser()) // Original
+app.use(cookieParser(process.env.SESSION_SECRET))
 
 // JWT Middleware
 app.use(utilities.checkJWTToken)
