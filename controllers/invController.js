@@ -165,7 +165,6 @@ invCont.editInventoryView = async function (req, res, next) {
   const itemData = await invModel.getVehicleInfoByInventoryId(inv_id)
   const classificationSelect = await utilities.buildClassificationList(itemData[0].classification_id)
   const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
-  console.log
   res.render("./inventory/edit-inventory", {
     title: "Edit " + itemName,
     nav,
@@ -192,7 +191,6 @@ invCont.deleteInventoryViem = async function (req, res, next) {
   let nav = await utilities.getNav()
   const itemData = await invModel.getVehicleInfoByInventoryId(inv_id)
   const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
-  console.log
   res.render("./inventory/delete-inventory", {
     title: "Delete " + itemName,
     nav,

@@ -18,6 +18,10 @@ router.get("/", utilities.checkLogin, utilities.handleErrors(accController.build
 // Process the login attempt
 router.get("/logout", utilities.checkLogin, utilities.handleErrors(accController.processLogout))
 
+
+// Route to build Account edit view
+router.get("/edit/:account_id", utilities.checkLogin, utilities.handleErrors(accController.buildEditAcc))
+
 // Process the registration data
 router.post(
   "/register",
@@ -32,6 +36,22 @@ router.post(
   regValidate.loginRules(),
   regValidate.checkLoginData,
   utilities.handleErrors(accController.registerLogin)
+)
+
+// Process the info update attempt
+router.post(
+  "/edit/info",
+  regValidate.UpdateInfoRules(),
+  regValidate.checkUpdateInfoData,
+  utilities.handleErrors(accController.UpdateInfoData)
+)
+
+// Process the password update attempt
+router.post(
+  "/edit/password",
+  regValidate.UpdatePasswordRules(),
+  regValidate.checkUpdatePasswordData,
+  utilities.handleErrors(accController.UpdatePasswordData)
 )
 
 module.exports = router

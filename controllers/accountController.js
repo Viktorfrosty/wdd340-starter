@@ -121,6 +121,7 @@ async function registerLogin(req, res) {
 * *************************************** */
 async function buildAccManagement(req, res, next) {
   let nav = await utilities.getNav()
+  console.log(res.locals.accountData)
   res.render("account/", {
     title: "Account Management",
     nav,
@@ -138,5 +139,29 @@ async function processLogout(req, res, next) {
   res.redirect("/")
 }
 
+/* ****************************************
+*  Deliver edit account view
+* *************************************** */
+async function buildEditAcc(req, res, next) {
+  const accountId = parseInt(req.params.account_id)
+  if (accountId === res.locals.accountData.account_id) {
+    const info = await accModel.getAccountByaccountId(accountId)
+    console.log(info)
+    let nav = await utilities.getNav()
+    res.render("account/edit", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+      account_id: accountId,
+      account_firstname: info.account_firstname,
+      account_lastname: info.account_lastname,
+      account_email: info.account_email
+    })
+  } else {
+    req.flash("notice", "Invalid access.")
+    res.redirect("/account")
+  }
+  
+}
 
-module.exports = { buildLogin, buildRegister, registerAccount, registerLogin, buildAccManagement, processLogout }
+module.exports = { buildLogin, buildRegister, registerAccount, registerLogin, buildAccManagement, processLogout, buildEditAcc }

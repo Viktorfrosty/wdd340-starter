@@ -12,20 +12,20 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:invId", utilities.handleErrors(invController.buildByVehicleInfo))
 
 // Route to build management
-router.get("/", utilities.handleErrors(invController.buildManagement))
+router.get("/", utilities.checkLogin, utilities.checkAccountType, utilities.handleErrors(invController.buildManagement))
 
 // Route to build add classification
-router.get("/add-classification", utilities.handleErrors(invController.buildManagementAddClassification))
+router.get("/add-classification", utilities.checkLogin, utilities.checkAccountType, utilities.handleErrors(invController.buildManagementAddClassification))
 
 // Route to build add inventory
-router.get("/add-inventory", utilities.handleErrors(invController.buildManagementAddInventory))
+router.get("/add-inventory", utilities.checkLogin, utilities.checkAccountType, utilities.handleErrors(invController.buildManagementAddInventory))
 
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
-router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
+router.get("/edit/:inv_id", utilities.checkLogin, utilities.checkAccountType, utilities.handleErrors(invController.editInventoryView))
 
 // deleting process
-router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInventoryViem))
+router.get("/delete/:inv_id", utilities.checkLogin, utilities.checkAccountType, utilities.handleErrors(invController.deleteInventoryViem))
 
 // Process the add classification form
 router.post(
@@ -46,7 +46,7 @@ router.post(
 // process the update
 router.post("/update/",
     invValidate.checkInventoryUpdateData,
-     utilities.handleErrors(invController.updateInventory)
+    utilities.handleErrors(invController.updateInventory)
 )
 
 // deleting process

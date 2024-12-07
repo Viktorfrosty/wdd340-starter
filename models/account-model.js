@@ -13,26 +13,6 @@ async function registerAccount(account_firstname, account_lastname, account_emai
     }
   }
 
-// /* *****************************
-// *   Register login
-// * *************************** */
-// async function registerLogin(account_email, account_password) { 
-//   try { const sql = "SELECT * FROM account WHERE account_email = $1"; 
-//     const result = await pool.query(sql, [account_email]); 
-//     if (result.rows.length > 0) { 
-//       const user = result.rows[0];
-//       const match = await bcrypt.compare(account_password, user.account_password);
-//       if (match) { 
-//         return true;
-//       } else { 
-//         return false;
-//       } 
-//       }
-//     } catch (error) { 
-//       return error.message; 
-//     } 
-//   }
-
 /* **********************
  *   Check for existing email
  * ********************* */
@@ -60,5 +40,19 @@ async function getAccountByEmail (account_email) {
   }
 }
 
-// module.exports = { registerAccount, checkExistingEmail, registerLogin }
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail }
+/* *****************************
+*   Return account data using id
+* *************************** */
+async function getAccountByaccountId (account_id) {
+  try {
+    const result = await pool.query(
+      'SELECT account_firstname, account_lastname, account_email FROM account WHERE account_id = $1',
+      [account_id])
+    return result.rows[0]
+  } catch (error) {
+    return new Error("No matching info found")
+  }
+}
+
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountByaccountId }
