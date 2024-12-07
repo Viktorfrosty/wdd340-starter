@@ -252,7 +252,7 @@ invCont.updateInventory = async function (req, res, next) {
     res.status(501).render("inventory/edit-inventory", {
     title: "Edit " + itemName,
     nav,
-    classificationSelect: classificationSelect,
+    typeSelector: classificationSelect,
     errors: null,
     inv_id,
     inv_make,

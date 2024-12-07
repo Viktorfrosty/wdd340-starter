@@ -43,7 +43,7 @@ router.post(
   "/edit/info",
   regValidate.UpdateInfoRules(),
   regValidate.checkUpdateInfoData,
-  utilities.handleErrors(accController.UpdateInfoData)
+  utilities.handleErrors(accController.updateInfoData)
 )
 
 // Process the password update attempt
@@ -51,7 +51,7 @@ router.post(
   "/edit/password",
   regValidate.UpdatePasswordRules(),
   regValidate.checkUpdatePasswordData,
-  utilities.handleErrors(accController.UpdatePasswordData)
+  utilities.handleErrors(accController.updatePasswordData)
 )
 
 module.exports = router

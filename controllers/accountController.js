@@ -121,7 +121,6 @@ async function registerLogin(req, res) {
 * *************************************** */
 async function buildAccManagement(req, res, next) {
   let nav = await utilities.getNav()
-  console.log(res.locals.accountData)
   res.render("account/", {
     title: "Account Management",
     nav,
@@ -144,9 +143,9 @@ async function processLogout(req, res, next) {
 * *************************************** */
 async function buildEditAcc(req, res, next) {
   const accountId = parseInt(req.params.account_id)
-  if (accountId === res.locals.accountData.account_id) {
+  const localId = parseInt(res.locals.accountData.account_id)
+  if (accountId === localId) {
     const info = await accModel.getAccountByaccountId(accountId)
-    console.log(info)
     let nav = await utilities.getNav()
     res.render("account/edit", {
       title: "Edit Account",
@@ -164,4 +163,75 @@ async function buildEditAcc(req, res, next) {
   
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, registerLogin, buildAccManagement, processLogout, buildEditAcc }
+/* ****************************************
+*  generate edit account info response
+* *************************************** */
+async function updateInfoData(req, res, next) {
+  let nav = await utilities.getNav()
+  const { 
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  } = req.body
+  const updateResult = await accModel.updateInfoData(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  )
+  if (updateResult) { const accessToken = jwt.sign(req.body, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+    // Log the new JWT instead of the old one 
+    console.log('Updated Account Data:', req.body); console.log('New JWT:', jwt.decode(accessToken))
+    // Set the new JWT in the cookie 
+    if (process.env.NODE_ENV === 'development') { 
+      res.cookie('jwt', accessToken, { httpOnly: true, maxAge: 3600 * 1000 }); 
+    } else { 
+      res.cookie('jwt', accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 }); 
+    } 
+    req.flash('notice', 'The account was successfully updated.')
+    res.redirect('/account')
+  } else { 
+    req.flash('notice', 'Sorry, the account update failed.')
+    res.status(501).render('account/edit', { 
+      title: 'Edit Account', 
+      nav, 
+      errors: null, 
+      account_id, 
+      account_firstname, 
+      account_lastname, 
+      account_email 
+    })
+  } 
+}
+
+/* ****************************************
+*  generate edit account password response
+* *************************************** */
+async function updatePasswordData(req, res, next) {
+  let nav = await utilities.getNav()
+  const { 
+    account_id,
+    account_password
+  } = req.body
+  let hashedPassword
+  try {
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the password update.')
+    res.status(501).redirect(`${account_id}`)
+  } 
+  const updateResult = await accModel.updatePasswordData(
+    account_id,
+    hashedPassword
+  )
+  if (updateResult) {
+    req.flash("notice", `The account was successfully updated.`)
+    res.redirect("/account")
+  } else {
+    req.flash('notice', 'Sorry, the account update failed.')
+    res.status(501).redirect(`${account_id}`)
+  }
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, registerLogin, buildAccManagement, processLogout, buildEditAcc, updateInfoData, updatePasswordData }

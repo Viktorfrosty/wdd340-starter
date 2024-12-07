@@ -52,7 +52,7 @@ validate.addInventoryElementRules = () => {
             .withMessage('Price is required.'), 
         body("inv_miles") 
             .matches(/^[0-9]{1,}$/) 
-            .withMessage('Miles must be a number.') 
+            .withMessage('Miles must be a number.')
             .notEmpty() 
             .withMessage('Miles is required.'), 
         body("inv_color") 
@@ -108,11 +108,11 @@ validate.checkInventoryRegData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      const typeSelector = await utilities.buildClassificationList(classification_id)
+      const classificationSelect = await utilities.buildClassificationList(classification_id)
       res.render("./inventory/add-inventory", {
         errors,
         title: "Add Inventory",
-        typeSelector,
+        typeSelector: classificationSelect,
         nav, 
         inv_model, 
         inv_make, 
@@ -138,11 +138,11 @@ validate.checkInventoryUpdateData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      const typeSelector = await utilities.buildClassificationList(classification_id)
+      const classificationSelect = await utilities.buildClassificationList(classification_id)
       res.render("./inventory/edit-inventory", {
         errors,
         title: `Edit ${inv_make} ${inv_model}`,
-        typeSelector,
+        typeSelector: classificationSelect,
         nav, 
         inv_model, 
         inv_make, 

@@ -22,7 +22,7 @@
             Update Account Information
         </h2>
 
-        <input type="hidden" name="inv_id" value="<%= account_id %>">
+        <input type="hidden" name="account_id" value="<%= account_id %>">
 
         <label for="account_firstname">First Name</label><br>
         <ul>
@@ -30,7 +30,7 @@
             <li>No numbers allowed.</li>
             <li>No special characters allowed.</li>
         </ul>
-        <input type="text" id="account_firstname" name="account_firstname" placeholder="Jhon" pattern="^[A-Z][A-Za-z]*$" required value="<%= account_firstname %>"><br>
+        <input type="text" id="account_firstname" name="account_firstname" placeholder="<%= locals.accountData.account_firstname %>" pattern="^[A-Z][A-Za-z]*$" required value="<%= account_firstname %>"><br>
 
         <label for="account_lastname">Last Name</label><br>
         <ul>
@@ -38,10 +38,10 @@
             <li>No numbers allowed.</li>
             <li>No special characters allowed.</li>
         </ul>
-        <input type="text" id="account_lastname" name="account_lastname" placeholder="Doe" pattern="^[A-Z][A-Za-z]*$" required value="<%= account_lastname %>"><br>
+        <input type="text" id="account_lastname" name="account_lastname" placeholder="<%= locals.accountData.account_lastname %>" pattern="^[A-Z][A-Za-z]*$" required value="<%= account_lastname %>"><br>
 
         <label for="account_email">Email</label><br>
-        <input type="email" id="account_email" name="account_email" placeholder="your@email.com" required value="<%= account_email %>"><br>
+        <input type="email" id="account_email" name="account_email" placeholder="<%= locals.accountData.account_email %>" required value="<%= account_email %>"><br>
 
         <input type="submit" value="Update Information" disabled>
 
@@ -53,7 +53,7 @@
             Update Password
         </h2>
         
-        <input type="hidden" name="inv_id" value="<%= account_id %>">
+        <input type="hidden" name="account_id" value="<%= account_id %>">
         
         <label for="account_password">
             Password must contain:
