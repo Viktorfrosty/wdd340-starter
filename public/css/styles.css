@@ -82,6 +82,9 @@ nav a:hover {
   align-self: flex-start;
   margin-top: 25px;
 }
+#tools a {
+  margin-left: 10px;
+}
 footer p {
   align-self: start;
 }
@@ -319,10 +322,10 @@ form input[type="submit"], form #registration {
   margin-top: 10px;
   align-self: center;
 }
-form label, form p, form p a, form li {
+form label, form h2, form p, form p a, form li {
   color: var(--color-accent1);
 }
-form label, form p, form p a, form input, form li, form select {
+form label, form h2, form p, form p a, form input, form li, form select {
   font-family: var(--main-fonts);
 }
 form textarea {
@@ -340,6 +343,6 @@ form ul {
   gap: 10px;
 }
 /* add classification view */
-form input[value="Create Classification"], form input[value="Update Vehicle"], form input[value="Delete Vehicle"] {
+form input[value="Create Classification"], form input[value="Update Vehicle"], form input[value="Delete Vehicle"], form input[value="Update Password"], form input[value="Update Information"] {
   width: 175px;
 }

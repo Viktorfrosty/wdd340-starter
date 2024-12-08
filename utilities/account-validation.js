@@ -27,7 +27,7 @@ validate.registationRules = () => {
         .withMessage("Last name is required.") 
         .matches(/^[A-Z][A-Za-z]*$/) 
         .withMessage('Last name must start with an uppercase letter and can contain only alphabetic characters.')
-        .isLength({ min: 2 })
+        .isLength({ min: 1 })
         .withMessage("Please provide a last name."), // on error this message is sent.
   
       // valid email is required and cannot already exist in the database
@@ -142,7 +142,6 @@ validate.checkLoginData = async (req, res, next) => {
   * ********************************* */
 validate.UpdateInfoRules = () => {
   return [
-
     body("account_firstname")
       .trim()
       .escape()
@@ -160,7 +159,7 @@ validate.UpdateInfoRules = () => {
       .withMessage("Last name is required.") 
       .matches(/^[A-Z][A-Za-z]*$/) 
       .withMessage('Last name must start with an uppercase letter and can contain only alphabetic characters.')
-      .isLength({ min: 2 })
+      .isLength({ min: 1 })
       .withMessage("Please provide a last name."),
 
     body("account_email")
@@ -173,7 +172,7 @@ validate.UpdateInfoRules = () => {
         const account_id = req.body.account_id
         const emailExists = await accountModel.checkExistingUnboundEmail(account_email, account_id)
         if (emailExists) { 
-          throw new Error("Email exists. Please use a different email")
+          throw new Error("Email error. Please use a different email")
         } 
       }),
   ]
@@ -184,20 +183,16 @@ validate.UpdateInfoRules = () => {
   * ********************************* */
 validate.UpdatePasswordRules = () => {
   return [
-
     body("account_password")
       .trim()
       .notEmpty()
-      .withMessage("Password is required.")
       .isStrongPassword({
         minLength: 12,
         minLowercase: 1,
         minUppercase: 1,
         minNumbers: 1,
         minSymbols: 1,
-      })
-      .withMessage("Password does not meet requirements."),
-
+      }),
   ]
 }
 

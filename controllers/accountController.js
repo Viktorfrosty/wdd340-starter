@@ -100,7 +100,8 @@ async function registerLogin(req, res) {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
-      return res.redirect("/account/")
+      req.flash("notice", "You have been successfully logged in")
+      return res.redirect("/account")
     }
     else {
       req.flash("notice", "Please check your credentials and try again.")
@@ -167,7 +168,6 @@ async function buildEditAcc(req, res, next) {
 *  generate edit account info response
 * *************************************** */
 async function updateInfoData(req, res, next) {
-  let nav = await utilities.getNav()
   const { 
     account_id,
     account_firstname,
@@ -180,10 +180,9 @@ async function updateInfoData(req, res, next) {
     account_lastname,
     account_email
   )
-  if (updateResult) { const accessToken = jwt.sign(req.body, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
-    // Log the new JWT instead of the old one 
-    console.log('Updated Account Data:', req.body); console.log('New JWT:', jwt.decode(accessToken))
-    // Set the new JWT in the cookie 
+  // const updateResult = null
+  if (updateResult) { 
+    const accessToken = jwt.sign(req.body, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
     if (process.env.NODE_ENV === 'development') { 
       res.cookie('jwt', accessToken, { httpOnly: true, maxAge: 3600 * 1000 }); 
     } else { 
@@ -193,15 +192,7 @@ async function updateInfoData(req, res, next) {
     res.redirect('/account')
   } else { 
     req.flash('notice', 'Sorry, the account update failed.')
-    res.status(501).render('account/edit', { 
-      title: 'Edit Account', 
-      nav, 
-      errors: null, 
-      account_id, 
-      account_firstname, 
-      account_lastname, 
-      account_email 
-    })
+    res.status(501).redirect(`${account_id}`)
   } 
 }
 
@@ -209,7 +200,6 @@ async function updateInfoData(req, res, next) {
 *  generate edit account password response
 * *************************************** */
 async function updatePasswordData(req, res, next) {
-  let nav = await utilities.getNav()
   const { 
     account_id,
     account_password
@@ -225,6 +215,7 @@ async function updatePasswordData(req, res, next) {
     account_id,
     hashedPassword
   )
+  // const updateResult = null
   if (updateResult) {
     req.flash("notice", `The account was successfully updated.`)
     res.redirect("/account")
