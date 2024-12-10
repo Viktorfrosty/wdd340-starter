@@ -258,28 +258,3 @@ SET
     '/images/vehicles/'
   );
 
--- week 05 Learning activity 02: Register three new accounts with the following information using your registration form:
-
--- account_firstname: Basic
--- account_lastname: Client
--- account_email: basic@340.edu
--- account_password: I@mABas1cCl!3nt
-
--- account_firstname: Happy
--- account_lastname: Employee
--- account_email: happy@340.edu
--- account_password: I@mAnEmpl0y33
-
--- account_firstname: Manager
--- account_lastname: User
--- account_email: manager@340.edu
--- account_password: I@mAnAdm!n1strat0r
-
--- just in case it's needed to start all over:
--- DROP TABLE IF EXISTS public.account;
--- DROP TABLE IF EXISTS public.classification CASCADE;
--- DROP TABLE IF EXISTS public.inventory;
--- DROP TYPE IF EXISTS public.account_type;
-
--- DELETE FROM public.account WHERE account_id = 1;
--- ALTER SEQUENCE account_account_id_seq RESTART WITH 1;

@@ -25,4 +25,4 @@ pnpm-lock.yaml
 .vscode/
 
 # Extra: ignore SQLTools
-render.session.sql
+CSE 340.session.sql

@@ -48,7 +48,7 @@ async function getVehicleInfoByInventoryId(inv_id) {
  * ************************** */
 async function registerClassificationElement(classification_name) {
   try {
-    const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+    const sql = "INSERT INTO public.classification (classification_name) VALUES ($1) RETURNING *"
     return await pool.query(sql, [classification_name])
   } catch (error) {
     console.error("registerClassificationElement error " + error.message)
@@ -64,7 +64,7 @@ function capitalize(str) {
 
 async function checkExistingClassification(classification_name) { 
   try {
-    const sql = "SELECT * FROM classification WHERE classification_name = $1"
+    const sql = "SELECT * FROM public.classification WHERE classification_name = $1"
     const classification1 = await pool.query(sql, [classification_name.toLowerCase()])
     const classification2 = await pool.query(sql, [classification_name.toUpperCase()])
     const classification3 = await pool.query(sql, [capitalize(classification_name)])
@@ -82,7 +82,7 @@ async function registerInventoryElement(inv_model, inv_make, classification_id, 
     if (!inv_description.endsWith('.')) {
       inv_description += '.';
     }
-    const sql = "INSERT INTO inventory (inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
+    const sql = "INSERT INTO public.inventory (inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
     return await pool.query(sql, [inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail])
   } catch (error) {
     console.error("registerClassificationElement error " + error.message)
@@ -135,7 +135,7 @@ async function updateInventory(
  * ************************** */
 async function deleteInventoryObject(inv_id) {
   try {
-    sql = 'DELETE FROM inventory WHERE inv_id = $1';
+    sql = 'DELETE FROM public.inventory WHERE inv_id = $1';
     const data = await pool.query(sql, [inv_id])
     return data
   } catch (error) {
