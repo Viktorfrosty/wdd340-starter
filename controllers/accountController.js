@@ -4,9 +4,9 @@ const bcrypt = require("bcryptjs")
 const accModel = require("../models/account-model")
 const utilities = require("../utilities")
 
-/* ****************************************
-*    Deliver login view
-* *************************************** */
+/*****************************************
+* Deliver login view
+*****************************************/
 async function buildLogin(req, res, next) {
     let nav = await utilities.getNav()
     res.render("account/login", {
@@ -16,9 +16,9 @@ async function buildLogin(req, res, next) {
     })
 }
 
-/* ****************************************
-*    Deliver registration view
-* *************************************** */
+/*****************************************
+* Deliver registration view
+*****************************************/
 async function buildRegister(req, res, next) {
     let nav = await utilities.getNav()
     res.render("account/register", {
@@ -28,9 +28,9 @@ async function buildRegister(req, res, next) {
     })
 }
 
-/* ****************************************
-*    Process Registration
-* *************************************** */
+/*****************************************
+* Process Registration
+*****************************************/
 async function registerAccount(req, res) {
     let nav = await utilities.getNav()
     const { account_firstname, account_lastname, account_email, account_password } = req.body
@@ -74,9 +74,9 @@ async function registerAccount(req, res) {
     }
 }
 
-/* ****************************************
- *    Process login request
- * ************************************ */
+/*****************************************
+* Process login request
+**************************************/
 async function registerLogin(req, res) {
     let nav = await utilities.getNav()
     const { account_email, account_password } = req.body
@@ -117,9 +117,9 @@ async function registerLogin(req, res) {
     }
 }
 
-/* ****************************************
-*    Deliver account view
-* *************************************** */
+/*****************************************
+* Deliver account view
+*****************************************/
 async function buildAccManagement(req, res, next) {
     let nav = await utilities.getNav()
     res.render("account/", {
@@ -129,9 +129,9 @@ async function buildAccManagement(req, res, next) {
     })
 }
 
-/* ****************************************
-*    Process logout
-* *************************************** */
+/*****************************************
+* Process logout
+*****************************************/
 async function processLogout(req, res, next) {
     let nav = await utilities.getNav()
     res.clearCookie('jwt')
@@ -139,9 +139,9 @@ async function processLogout(req, res, next) {
     res.redirect("/")
 }
 
-/* ****************************************
-*    Deliver edit account view
-* *************************************** */
+/*****************************************
+* Deliver edit account view
+*****************************************/
 async function buildEditAcc(req, res, next) {
     const accountId = parseInt(req.params.account_id)
     const localId = parseInt(res.locals.accountData.account_id)
@@ -164,9 +164,9 @@ async function buildEditAcc(req, res, next) {
     
 }
 
-/* ****************************************
-*    generate edit account info response
-* *************************************** */
+/*****************************************
+* generate edit account info response
+*****************************************/
 async function updateInfoData(req, res, next) {
     const { 
         account_id,
@@ -196,9 +196,9 @@ async function updateInfoData(req, res, next) {
     } 
 }
 
-/* ****************************************
-*    generate edit account password response
-* *************************************** */
+/*****************************************
+* generate edit account password response
+*****************************************/
 async function updatePasswordData(req, res, next) {
     const { 
         account_id,

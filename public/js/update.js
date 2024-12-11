@@ -1,6 +1,7 @@
 const formInv = document.querySelector("#updateForm")
 const formInfo = document.querySelector("#updateInfo")
 const formPsw = document.querySelector("#updatePassword")
+const formRec = document.querySelector("#updateReview")
 
 if (formInv) {
     formInv.addEventListener("change", function () { 
@@ -19,6 +20,13 @@ if (formInfo) {
 if (formPsw) {
     formPsw.addEventListener("change", function () { 
         let updateBtn = document.querySelector('input[value="Update Password"]')
+        updateBtn.removeAttribute("disabled")
+    })
+}
+
+if (formRec) {
+    formRec.addEventListener("change", function () { 
+        let updateBtn = document.querySelector('input[value="Update Review"]')
         updateBtn.removeAttribute("disabled")
     })
 }
