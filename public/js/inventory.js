@@ -1,4 +1,4 @@
-'use strict' 
+"use strict" 
  
  // Get a list of items in inventory based on the classification_id 
  let classificationList = document.querySelector("#classificationList")
@@ -8,7 +8,7 @@
   fetch(classIdURL) 
   .then(function (response) { 
    if (response.ok) { 
-    return response.json(); 
+    return response.json()
    } 
    throw Error("Network response was not OK")
   }) 
@@ -16,7 +16,7 @@
    buildInventoryList(data)
   }) 
   .catch(function (error) { 
-   console.log('There was a problem: ', error.message) 
+   console.log("There was a problem: ", error.message) 
   }) 
  })
 
@@ -24,18 +24,18 @@
 function buildInventoryList(data) { 
     let inventoryDisplay = document.getElementById("inventoryDisplay")
     // Set up the table labels 
-    let dataTable = '<thead>'
-    dataTable += '<tr><th>Vehicle Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>'
-    dataTable += '</thead>'
+    let dataTable = "<thead>"
+    dataTable += "<tr><th>Vehicle Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>"
+    dataTable += "</thead>"
     // Set up the table body 
-    dataTable += '<tbody>'
+    dataTable += "<tbody>"
     // Iterate over all vehicles in the array and put each in a row 
     data.forEach(function (element) {  
      dataTable += `<tr><td>${element.inv_make} ${element.inv_model}</td>`
-     dataTable += `<td><a href='/inv/edit/${element.inv_id}' title='Click to update'>Modify</a></td>`; 
-     dataTable += `<td><a href='/inv/delete/${element.inv_id}' title='Click to delete'>Delete</a></td></tr>`
+     dataTable += `<td><a href="/inv/edit/${element.inv_id}" title="Click to update">Modify</a></td>`
+     dataTable += `<td><a href="/inv/delete/${element.inv_id}" title="Click to delete">Delete</a></td></tr>`
     }) 
-    dataTable += '</tbody>'
+    dataTable += "</tbody>"
     // Display the contents in the Inventory Management view 
     inventoryDisplay.innerHTML = dataTable
    }

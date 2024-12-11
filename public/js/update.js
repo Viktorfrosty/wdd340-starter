@@ -20,5 +20,5 @@ if (formPsw) {
     formPsw.addEventListener("change", function () { 
         let updateBtn = document.querySelector('input[value="Update Password"]')
         updateBtn.removeAttribute("disabled")
-    });
+    })
 }

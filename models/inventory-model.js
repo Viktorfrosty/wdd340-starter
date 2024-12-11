@@ -79,8 +79,8 @@ async function checkExistingClassification(classification_name) {
  * ************************** */
 async function registerInventoryElement(inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail) {
   try {
-    if (!inv_description.endsWith('.')) {
-      inv_description += '.';
+    if (!inv_description.endsWith(".")) {
+      inv_description += "."
     }
     const sql = "INSERT INTO public.inventory (inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
     return await pool.query(sql, [inv_model, inv_make, classification_id, inv_year, inv_price, inv_miles, inv_color, inv_description, inv_image, inv_thumbnail])
@@ -106,8 +106,8 @@ async function updateInventory(
   classification_id
 ) {
   try {
-    if (!inv_description.endsWith('.')) {
-      inv_description += '.';
+    if (!inv_description.endsWith(".")) {
+      inv_description += ".";
     }
     const sql =
       "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *"
@@ -135,7 +135,7 @@ async function updateInventory(
  * ************************** */
 async function deleteInventoryObject(inv_id) {
   try {
-    sql = 'DELETE FROM public.inventory WHERE inv_id = $1';
+    sql = "DELETE FROM public.inventory WHERE inv_id = $1"
     const data = await pool.query(sql, [inv_id])
     return data
   } catch (error) {
