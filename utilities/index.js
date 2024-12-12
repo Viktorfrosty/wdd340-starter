@@ -166,19 +166,31 @@ util.checkAccountType = (req, res, next) => {
 util.checkReviewRelationship = async (req, res, next) => {
     const review_id = req.params.review_id
     const account_id = res.locals.accountData.account_id
-    const match = await revModel.idVerification(review_id, account_id)
-    if (match) {
-        next()
+    const account_type = res.locals.accountData.account_type
+    if (account_type !== "Admin") {
+        const match = await revModel.idVerification(review_id, account_id)
+        if (match) {
+            next()
+        } else {
+            req.flash("notice", "Access Forbidden")
+            return res.redirect("/account")
+        }
     } else {
-        req.flash("notice", "Access Forbidden")
-        return res.redirect("/account")
+        const match = await revModel.idVerification(review_id, account_id)
+        if (match) {
+            next()
+        } else {
+            const autorData = await revModel.getAutorByReviewId(review_id)
+            res.locals.screenName = `${autorData[0].account_firstname.charAt(0)}${autorData[0].account_lastname}`
+            next()
+        }
     }
 }
 
 /*********************************************
 * Build the review list html for the inv/detail
 *********************************************/
-util.buildAccountReviews = async function (reviewsList) {
+util.buildAccountReviews = async function (reviewsList, adminList) {
     let reviews = '<div>'
     reviews += '<h3>My Reviews</h3>'
     reviews += '<ul id="account-reviews">'
@@ -194,6 +206,22 @@ util.buildAccountReviews = async function (reviewsList) {
         reviews += '</li>'
     }
     reviews += '</ul>'
+    if (adminList) {
+        reviews += '<h3>Client Reviews</h3>'
+        reviews += '<ul id="all-reviews">'
+        if (adminList.length >= 1) {
+            adminList.forEach(review => {
+                reviews += '<li>'
+                reviews += `<p><p><b>${review.account_firstname.charAt(0)}${review.account_lastname}</b> reviewed the ${review.inv_year} ${review.inv_make} ${review.inv_model} on ${review.review_date} | <a href="/review/edit/${review.review_id}">Edit</a> | <a href="/review/delete/${review.review_id}">Delete</a></p>`
+                reviews += '</li>'
+            })
+        } else {
+            reviews += '<li>'
+            reviews += '<p>None yet.</p>'
+            reviews += '</li>'
+        }
+        reviews += '</ul>'
+    }
     reviews += '</div>'
     return reviews
 }
@@ -241,7 +269,7 @@ util.addReviewForm = function(check, invId, accountId, screenName, text = "") {
     let form = '<div>'
     if (check) {
         form += '<h2>Add your own review</h2>'
-        form += `<form id="VehicleReview" action="/detail/generate" method="post">`
+        form += `<form id="VehicleReview" action="/inv/detail/add-review" method="post">`
         form += '<label for="screen_name">Screen Name:</label></br>'
         form += `<input type="text" id="screen_name" name="screen_name" value="${screenName}" required readonly><br>` /* pattern="^[A-Z][A-Z][a-z]*$" */
         form += '<label for="review_text">Review Text:</label></br>'

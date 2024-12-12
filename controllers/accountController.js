@@ -122,12 +122,20 @@ async function registerLogin(req, res) {
 *****************************************/
 async function buildAccManagement(req, res, next) {
     let nav = await utilities.getNav()
-    const data = await accModel.getReviewsByAccountId(res.locals.accountData.account_id)
-    const reviewsList = await utilities.buildAccountReviews(data)
+    const accountReviews = await accModel.getReviewsByAccountId(res.locals.accountData.account_id)
+    let clientReviews 
+    if (res.locals.accountData.account_type === "Admin") {
+        clientReviews = await accModel.getClientReviews()
+    } else {
+        clientReviews = false
+    }
+    const accType = res.locals.accountData.account_type
+    const reviewsList = await utilities.buildAccountReviews(accountReviews, clientReviews)
     res.render("account/", {
         title: "Account Management",
         nav,
         errors: null,
+        accType,
         reviewsList
     })
 }

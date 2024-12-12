@@ -1,13 +1,17 @@
-/* ***********************
- * Final Enhancement Task
- *************************/
+/************************
+* Final Enhancement Task
+*************************/
 
-// Needed Resources 
+/************************
+* Needed Resources
+*************************/
 const pool = require("../database/")
 
 const model = {}
 
-// ID verification
+/************************
+* ID verification
+*************************/
 model.idVerification = async function (review_id, account_id) {
     try {
         const sql = "SELECT * FROM public.review WHERE review_id = $1 AND account_id = $2"
@@ -18,7 +22,22 @@ model.idVerification = async function (review_id, account_id) {
     }
 }
 
-// Data fetch by review_id
+/************************
+* autor data fetch by review_id
+*************************/
+model.getAutorByReviewId = async function (review_id) {
+    try {
+        const sql = "SELECT b.account_firstname, b.account_lastname FROM public.review AS a JOIN public.account AS b ON a.account_id = b.account_id WHERE a.review_id = $1"
+        const data = await pool.query(sql, [review_id])
+        return data.rows
+    } catch (error) {
+        return new Error("No matching info found")
+    }
+}
+
+/************************
+* Data fetch by review_id
+*************************/
 model.getReviewByReviewId = async function (review_id) {
     try {
         const result = await pool.query(
@@ -30,7 +49,9 @@ model.getReviewByReviewId = async function (review_id) {
     }
 }
 
-// Update review
+/************************
+* Update review
+*************************/
 model.updateReview = async function (review_text, review_id) {
     try {
         const sql = "UPDATE public.review SET review_text = $1 WHERE review_id = $2 RETURNING *"
@@ -41,7 +62,9 @@ model.updateReview = async function (review_text, review_id) {
     }
 }
 
-// Delete review
+/************************
+* Delete review
+*************************/
 model.deleteReview = async function (review_id) {
     try {
         const sql = "DELETE FROM public.review WHERE review_id = $1"

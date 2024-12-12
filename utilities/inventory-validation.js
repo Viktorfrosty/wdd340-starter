@@ -177,12 +177,12 @@ validate.createReviewRules = () => {
  * ***************************** */
 validate.checkReviewCreationData = async (req, res, next) => {
     console.log("checkpoint 2")
-    const { inv_id } = req.body
+    const { inv_id, review_text } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         req.flash("notice", "The review could not be created.")
-        res.redirect(`/detail/${inv_id}`)
+        res.redirect(`/inv/detail/${inv_id}`)
         return
     }
     next()

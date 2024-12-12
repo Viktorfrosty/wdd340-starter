@@ -4,9 +4,9 @@ const { body, validationResult } = require("express-validator")
 
 const validate = {}
 
-/*  **********************************
-  *  Registration Data Validation Rules
-  * ********************************* */
+/***********************************
+* Registration Data Validation Rules
+***********************************/
 validate.registationRules = () => {
     return [
       // firstname is required and must be string
@@ -61,9 +61,9 @@ validate.registationRules = () => {
     ]
   }
 
-/*  **********************************
-  *  login Data Validation Rules
-  * ********************************* */
+/***********************************
+* login Data Validation Rules
+***********************************/
 validate.loginRules = () => {
   return [
     // valid email is required and cannot already exist in the database
@@ -96,9 +96,9 @@ validate.loginRules = () => {
   ]
 }
 
-/* ******************************
- * Check data and return errors or continue to registration
- * ***************************** */
+/***********************************
+* Check data and return errors or continue to registration
+*******************************/
 validate.checkRegData = async (req, res, next) => {
     const { account_firstname, account_lastname, account_email } = req.body
     let errors = []
@@ -118,9 +118,9 @@ validate.checkRegData = async (req, res, next) => {
     next()
   }
 
-/* ******************************
- * Check data and return errors or continue to login
- * ***************************** */
+/*******************************
+* Check data and return errors or continue to login
+*******************************/
 validate.checkLoginData = async (req, res, next) => {
   const { account_email } = req.body
   let errors = []
@@ -138,9 +138,9 @@ validate.checkLoginData = async (req, res, next) => {
   next()
 }
 
-/*  **********************************
-  *  update account info Validation Rules
-  * ********************************* */
+/***********************************
+* update account info Validation Rules
+***********************************/
 validate.UpdateInfoRules = () => {
   return [
     body("account_firstname")
@@ -179,9 +179,9 @@ validate.UpdateInfoRules = () => {
   ]
 }
 
-/*  **********************************
-  *  update account password Validation Rules
-  * ********************************* */
+/***********************************
+* update account password Validation Rules
+***********************************/
 validate.UpdatePasswordRules = () => {
   return [
     body("account_password")
@@ -197,9 +197,9 @@ validate.UpdatePasswordRules = () => {
   ]
 }
 
-/* ******************************
- * Check data and return errors or continue to update information
- * ***************************** */
+/***********************************
+* Check data and return errors or continue to update information
+*******************************/
 validate.checkUpdateInfoData = async (req, res, next) => {
   const { account_id, account_firstname, account_lastname, account_email } = req.body
   let errors = []
@@ -220,9 +220,9 @@ validate.checkUpdateInfoData = async (req, res, next) => {
   next()
 }
 
-/* ******************************
+/***********************************
 * Check data and return errors or continue to login
-* ***************************** */
+*******************************/
 validate.checkUpdatePasswordData = async (req, res, next) => {
 const { account_id } = req.body
 let errors = []

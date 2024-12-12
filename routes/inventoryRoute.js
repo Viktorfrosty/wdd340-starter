@@ -83,7 +83,7 @@ router.post("/delete", utilities.handleErrors(invController.deleteInventoryObjec
 
 // create review
 router.post(
-    "/detail/generate",
+    "/detail/add-review",
     invValidate.createReviewRules(),
     invValidate.checkReviewCreationData,
     utilities.handleErrors(invController.createVehicleReview)

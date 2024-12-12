@@ -34,7 +34,8 @@ invCont.buildByVehicleInfo = async function (req, res, next) {
         name = `${res.locals.accountData.account_firstname.charAt(0)}${res.locals.accountData.account_lastname}`
         accountId = res.locals.accountData.account_id
     }
-    const addReview = utilities.addReviewForm(res.locals.formCheck, inv_id, accountId, name, res.locals.review_text)
+    const text = res.locals.review_text
+    const addReview = utilities.addReviewForm(res.locals.formCheck, inv_id, accountId, name, text)
     let nav = await utilities.getNav()
     const title = `${info[0].inv_make} ${info[0].inv_model}`
     const year = `${info[0].inv_year}`
@@ -352,10 +353,10 @@ invCont.createVehicleReview = async function (req, res) {
     )
     if (result) {
         req.flash("notice", "The review created successfully.")
-        res.status(201).redirect(`/detail/${inv_id}`)
+        res.status(201).redirect(`/inv/detail/${inv_id}`)
     } else {
         req.flash("notice", "The review could not be created.")
-        res.status(501).redirect(`/detail/${inv_id}`)
+        res.status(501).redirect(`/inv/detail/${inv_id}`)
     }
 }
 

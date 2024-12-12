@@ -343,6 +343,6 @@ form ul {
   gap: 10px;
 }
 /* add classification view */
-form input[value="Create Classification"], form input[value="Update Vehicle"], form input[value="Delete Vehicle"], form input[value="Update Password"], form input[value="Update Information"], form input[value="Delete Review"], form input[value="Update Review"] {
+form input[value="Create Classification"], form input[value="Update Vehicle"], form input[value="Delete Vehicle"], form input[value="Update Password"], form input[value="Update Information"], form input[value="Delete Review"], form input[value="Update Review"], form input[value="Create Review"] {
   width: 175px;
 }

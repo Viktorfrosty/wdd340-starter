@@ -2,14 +2,18 @@
 * Final Enhancement Task
 ***********************************/
 
-// Needed Resources
+/**********************************
+* Needed Resources
+***********************************/
 const revModel = require("../models/review-model")
 const utilities = require(".")
 const { body, validationResult } = require("express-validator")
 
 const validate = {}
 
-// Review Validation Rules
+/**********************************
+* Review Validation Rules
+***********************************/
 validate.reviewRules = () => {
     return [
         body("review_text") 
@@ -20,7 +24,9 @@ validate.reviewRules = () => {
     ]
 }
 
-// Check data and return errors or continue to process review update
+/**********************************
+* Check data and return errors or continue to process review update
+***********************************/
 validate.checkReviewEditData = async (req, res, next) => {
     const { review_id, review_text } = req.body
     let errors = []
