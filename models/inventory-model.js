@@ -143,4 +143,19 @@ async function deleteInventoryObject(inv_id) {
     }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification, registerInventoryElement, updateInventory, deleteInventoryObject }
+//
+
+/****************************
+* Get Vehicle Reviews
+****************************/
+async function getVehicleReviewsByInventoryId(inv_id) {
+    try {
+        const sql = "SELECT a.*, b.account_firstname, b.account_lastname FROM public.review AS a JOIN public.account AS b ON a.account_id = b.account_id WHERE a.inv_id = $1 ORDER BY a.review_date DESC;"
+        const reviews = await pool.query(sql, [inv_id])
+        return reviews.rows
+    } catch (error) { 
+        console.error("getVehicleReviewsByInventoryId error " + error.message);
+    } 
+}
+
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification, registerInventoryElement, updateInventory, deleteInventoryObject, getVehicleReviewsByInventoryId }

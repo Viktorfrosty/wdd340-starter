@@ -21,7 +21,7 @@ if (text) {
 
     text.addEventListener("input", function (event) {  
         if (!pattern.test(event.target.value)) { 
-            event.target.setCustomValidity("Please follow the pattern: Start with a capital letter or number, followed by letters, numbers, or spaces.") 
+            event.target.setCustomValidity("Please follow the pattern: Start with an uppercase letter or a digit, followed by any combination of uppercase letters, lowercase letters, digits, spaces, dots, hyphens, or question marks.") 
         } else { 
             event.target.setCustomValidity("") 
         } 

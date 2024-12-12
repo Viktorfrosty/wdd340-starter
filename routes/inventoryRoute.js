@@ -1,4 +1,4 @@
-// Needed Resources 
+// Needed Resources
 const invValidate = require("../utilities/inventory-validation")
 const express = require("express")
 const router = new express.Router() 
@@ -9,7 +9,7 @@ const utilities = require("../utilities/")
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
 
 // Route to build a view by vehicle info
-router.get("/detail/:invId", utilities.handleErrors(invController.buildByVehicleInfo))
+router.get("/detail/:invId", utilities.addReviewFormLoginChek, utilities.handleErrors(invController.buildByVehicleInfo))
 
 // Route to build management
 router.get(
@@ -80,5 +80,12 @@ router.post(
 
 // deleting process
 router.post("/delete", utilities.handleErrors(invController.deleteInventoryObject))
+
+// create review
+router.post("/create",
+    invValidate.reviewRules(),
+    invValidate.checkReviewCreationData,
+    utilities.handleErrors(invController.createVehicleReview)
+)
 
 module.exports = router

@@ -63,7 +63,7 @@ validate.addInventoryElementRules = () => {
         body("inv_description") 
             .matches(/^[A-Z0-9][A-Za-z0-9\s\.\-\?]*$/)
             // .matches(/^[A-Z0-9][A-Za-z0-9\s]*$/)
-            // .withMessage('Description must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.') 
+            .withMessage('Description must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.')
             .notEmpty() 
             .withMessage('Description is required.'), 
         body("inv_image") 
@@ -157,6 +157,36 @@ validate.checkInventoryUpdateData = async (req, res, next) => {
       })
       return
     }
+    next()
+}
+
+// validate the review data in the inv/detail form
+validate.reviewRules = () => {
+    console.log("reviewRules init")
+    return [
+        body("review_text") 
+            .matches(/^[A-Z0-9][A-Za-z0-9\s\.\-\?]*$/)
+            .withMessage('Review Text must start with an uppercase letter or a digit, followed by any combination of uppercase letters, lowercase letters, digits, spaces, dots, hyphens, or question marks.')
+            .notEmpty() 
+            .withMessage('Review Text is required.'),
+    ]
+}
+
+/* ******************************
+ * Check data and return errors or continue to review registration
+ * ***************************** */
+validate.checkReviewCreationData = async (req, res, next) => {
+    console.log("checkReviewCreationData init")
+    const { inv_id } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        console.log("catch!")
+        req.flash("notice", "The reviem could not be created.")
+        res.redirect(`/inv/detail/${inv_id}`)
+        return
+    }
+    console.log("no catch")
     next()
 }
 

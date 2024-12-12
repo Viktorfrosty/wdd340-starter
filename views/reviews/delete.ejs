@@ -1,0 +1,45 @@
+<%# Final Enhancement Task %>
+
+<section class="frame">
+
+    <h1>
+        <%= title %>
+    </h1>
+
+    <%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <%  }) %>
+        </ul>
+    <% } %>
+
+    <form id="updateForm" action="/review/delete" method="post">
+
+        <label for="review_date">
+            Review Date:
+        </label><br>
+        <input type="text" id="review_date" name="review_date" <%# pattern="^[A-Z0-9][A-Za-z0-9\s]*$" %> value="<%= locals.review_date %>" required readonly><br> 
+
+        <label for="review_text">
+            Review Text:
+        </label><br>
+        <textarea name="review_text" id="review_text" required readonly><%= locals.review_text %></textarea><br>
+
+        <p>Confirm elimination - This is permanent.</p><br>
+        <input type="submit" value="Delete Review">
+
+        <input type="hidden" name="review_id"
+        <% if(locals.review_id) { 
+            %> value="<%= locals.review_id %>"
+        <% } %>>
+
+    </form>
+
+</section>
+
+<script src="../../js/update.js"></script>
+
+<script src="/js/script.js"></script>

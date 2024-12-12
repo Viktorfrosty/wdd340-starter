@@ -26,6 +26,15 @@ invCont.buildByVehicleInfo = async function (req, res, next) {
     const inv_id = req.params.invId
     const info = await invModel.getVehicleInfoByInventoryId(inv_id)
     const wrap = await utilities.buildVehicleInformation(info)
+    const data = await invModel.getVehicleReviewsByInventoryId(inv_id)
+    const reviewsList = await utilities.buildVehicleReviews(data)
+    let name
+    let accountId
+    if (res.locals.accountData) {
+        name = `${res.locals.accountData.account_firstname.charAt(0)}${res.locals.accountData.account_lastname}`
+        accountId = res.locals.accountData.account_id
+    }
+    const addReview = utilities.addReviewForm(res.locals.formCheck, inv_id, accountId, name, res.locals.review_text)
     let nav = await utilities.getNav()
     const title = `${info[0].inv_make} ${info[0].inv_model}`
     const year = `${info[0].inv_year}`
@@ -33,7 +42,9 @@ invCont.buildByVehicleInfo = async function (req, res, next) {
         year: year,
         title: title,
         nav,
-        wrap
+        wrap,
+        reviewsList,
+        addReview
     })
 }
 
@@ -322,6 +333,35 @@ invCont.deleteInventoryObject = async function (req, res, next) {
         inv_miles,
         inv_color,
         classification_id
+        })
+    }
+}
+
+//
+
+/****************************
+* Create Inventory Review
+****************************/
+invCont.createVehicleReview = async function (req, res, next) {
+    console.log("createVehicleReview init")
+    const { inv_id, review_text } = req.body
+    // const result = await revModel.updateReview(review_text, review_id)
+    const result = true
+    if (result) {
+        req.flash("notice", "Review updated successfully.")
+        res.redirect(`/inv/detail/${inv_id}`)
+    } else {
+        req.flash("notice", "Sorry, the process failed.")
+        const info = await revModel.getReviewByReviewId(review_id)
+        let nav = await utilities.getNav()
+        let title = `Edit ${info.inv_year} ${info.inv_make} ${info.inv_model} Review`
+        res.status(501).render("./reviews/edit", {
+            title,
+            nav,
+            errors: null,
+            review_id,
+            review_text,
+            review_date: info.review_date
         })
     }
 }

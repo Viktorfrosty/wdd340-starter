@@ -111,4 +111,14 @@ async function checkExistingUnboundEmail(account_email, account_id){
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountByaccountId, updateInfoData, updatePasswordData, checkExistingUnboundEmail }
+async function getReviewsByAccountId(account_id) {
+  try {
+    const sql = "SELECT a.*, b.inv_year, b.inv_make, b.inv_model FROM public.review AS a JOIN public.inventory AS b  ON a.inv_id = b.inv_id WHERE a.account_id = $1 ORDER BY a.review_date DESC;"
+    const reviews = await pool.query(sql, [account_id])
+    return reviews.rows
+  } catch (error) { 
+      console.error("getReviewsByAccountId error " + error.message);
+  } 
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountByaccountId, updateInfoData, updatePasswordData, checkExistingUnboundEmail, getReviewsByAccountId }

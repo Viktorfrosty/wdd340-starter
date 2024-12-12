@@ -31,7 +31,7 @@ util.getNav = async function (req, res, next) {
 /***************************************
 * Build the classification view HTML
 **************************************/
-util.buildClassificationGrid = async function(data){
+util.buildClassificationGrid = async function(data) {
     let grid
     if(data.length > 0){
         grid = '<ul id="inv-display">'
@@ -157,5 +157,110 @@ util.checkAccountType = (req, res, next) => {
     }
 }
 
+// Final Enhancement Task
+
+/*****************************************
+* Check existing relationship between 
+* logged account and review info
+**************************************/
+util.checkReviewRelationship = async (req, res, next) => {
+    const review_id = req.params.review_id
+    const account_id = res.locals.accountData.account_id
+    const match = await revModel.idVerification(review_id, account_id)
+    if (match) {
+        next()
+    } else {
+        req.flash("notice", "Access Forbidden")
+        return res.redirect("/account")
+    }
+}
+
+/*********************************************
+* Build the review list html for the inv/detail
+*********************************************/
+util.buildAccountReviews = async function (reviewsList) {
+    let reviews = '<div>'
+    reviews += '<h3>My Reviews</h3>'
+    reviews += '<ul id="account-reviews">'
+    if (reviewsList.length >= 1) {
+        reviewsList.forEach(review => {
+            reviews += '<li>'
+            reviews += `<p>Reviewed the ${review.inv_year} ${review.inv_make} ${review.inv_model} on ${review.review_date} | <a href="/review/edit/${review.review_id}">Edit</a> | <a href="/review/delete/${review.review_id}">Delete</a></p>`
+            reviews += '</li>'
+        })
+    } else { 
+        reviews += '<li>'
+        reviews += '<p>None yet.</p>'
+        reviews += '</li>'
+    }
+    reviews += '</ul>'
+    reviews += '</div>'
+    return reviews
+}
+
+/*********************************************
+* Build the review list html for the inv/detail
+*********************************************/
+util.buildVehicleReviews = async function (reviewsList) {
+    let reviews = '<div>'
+    reviews += '<h2>Customer Reviews</h2>'
+    reviews += '<ul id="vehicle-reviews">'
+    if (reviewsList.length >= 1) {
+        reviewsList.forEach(review => {
+            reviews += '<li>'
+            reviews += `<p><b>${review.account_firstname.charAt(0)}${review.account_lastname}</b> wrote on ${review.review_date}</p>`
+            reviews += `<p>${review.review_text}</p>`
+            reviews += '</li>'
+        })
+    } else { 
+        reviews += '<li>'
+        reviews += '<p>Be the first to write a review.</p>'
+        reviews += '</li>'
+    }
+    reviews += '</ul>'
+    reviews += '</div>'
+    return reviews
+}
+
+/*****************************************
+* Check Login for the creation of the form
+**************************************/
+util.addReviewFormLoginChek = (req, res, next) => {
+    if (res.locals.loggedin) {
+        res.locals.formCheck = true
+    } else {
+        res.locals.formCheck = false
+    }
+    next()
+}
+
+/*********************************************
+* Build the review form html for the inv/detail
+*********************************************/
+util.addReviewForm = function(check, invId, accountId, screenName, text = "") {
+    let form = '<div>'
+    if (check) {
+        form += '<h2>Add your own review</h2>'
+        form += `<form id="VehicleReview" action="/inv/detail/create" method="post">`
+        form += '<label for="screen_name">Screen Name:</label></br>'
+        form += `<input type="text" id="screen_name" name="screen_name" value="${screenName}" required readonly><br>` /* pattern="^[A-Z][A-Z][a-z]*$" */
+        form += '<label for="review_text">Review Text:</label></br>'
+        form += '<ul>'
+        form += '<li>First character should be uppercase or a number.</li>'
+        form += '<li>Special characters not allowed, except spaces, hyphens, dots and question marks.</li>'
+        form += '</ul>'
+        form += `<textarea name="review_text" id="review_text" required>${text}</textarea><br>`
+        form += `<input type="hidden" name="inv_id" value= ${invId}>`
+        form += `<input type="hidden" name="account_id" value= ${accountId}>`
+        form += '<input type="submit" value="Update Review">'
+        form += '</form>'
+        form += '<script src="/js/script.js"></script>'
+    } else {
+        form += '<p>You must <a href="/account/login">Login</a> to write a review.</p>'
+    }
+    form += '</div>'
+    return form
+}
+//
 
 module.exports = util
