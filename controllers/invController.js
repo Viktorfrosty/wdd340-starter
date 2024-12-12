@@ -342,27 +342,20 @@ invCont.deleteInventoryObject = async function (req, res, next) {
 /****************************
 * Create Inventory Review
 ****************************/
-invCont.createVehicleReview = async function (req, res, next) {
-    console.log("createVehicleReview init")
-    const { inv_id, review_text } = req.body
-    // const result = await revModel.updateReview(review_text, review_id)
-    const result = true
+invCont.createVehicleReview = async function (req, res) {
+    console.log("checkpoint 3")
+    const { review_text, inv_id, account_id } = req.body
+    const result = await invModel.createVehicleReview(
+        review_text,
+        inv_id,
+        account_id
+    )
     if (result) {
-        req.flash("notice", "Review updated successfully.")
-        res.redirect(`/inv/detail/${inv_id}`)
+        req.flash("notice", "The review created successfully.")
+        res.status(201).redirect(`/detail/${inv_id}`)
     } else {
-        req.flash("notice", "Sorry, the process failed.")
-        const info = await revModel.getReviewByReviewId(review_id)
-        let nav = await utilities.getNav()
-        let title = `Edit ${info.inv_year} ${info.inv_make} ${info.inv_model} Review`
-        res.status(501).render("./reviews/edit", {
-            title,
-            nav,
-            errors: null,
-            review_id,
-            review_text,
-            review_date: info.review_date
-        })
+        req.flash("notice", "The review could not be created.")
+        res.status(501).redirect(`/detail/${inv_id}`)
     }
 }
 

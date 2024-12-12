@@ -158,4 +158,14 @@ async function getVehicleReviewsByInventoryId(inv_id) {
     } 
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification, registerInventoryElement, updateInventory, deleteInventoryObject, getVehicleReviewsByInventoryId }
+async function createVehicleReview(review_text, inv_id, account_id) {
+    try {
+        const sql = "INSERT INTO public.review (review_text, inv_id, account_id) VALUES ($1, $2, $3) RETURNING *"
+        const review = await pool.query(sql, [review_text, inv_id, account_id])
+        return review.rows[0]
+    } catch (error) {
+        console.error("createVehicleReview error " + error.message);
+    }
+}
+
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification, registerInventoryElement, updateInventory, deleteInventoryObject, getVehicleReviewsByInventoryId, createVehicleReview }

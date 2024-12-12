@@ -161,8 +161,8 @@ validate.checkInventoryUpdateData = async (req, res, next) => {
 }
 
 // validate the review data in the inv/detail form
-validate.reviewRules = () => {
-    console.log("reviewRules init")
+validate.createReviewRules = () => {
+    console.log("checkpoint 1")
     return [
         body("review_text") 
             .matches(/^[A-Z0-9][A-Za-z0-9\s\.\-\?]*$/)
@@ -176,17 +176,15 @@ validate.reviewRules = () => {
  * Check data and return errors or continue to review registration
  * ***************************** */
 validate.checkReviewCreationData = async (req, res, next) => {
-    console.log("checkReviewCreationData init")
+    console.log("checkpoint 2")
     const { inv_id } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
-        console.log("catch!")
-        req.flash("notice", "The reviem could not be created.")
-        res.redirect(`/inv/detail/${inv_id}`)
+        req.flash("notice", "The review could not be created.")
+        res.redirect(`/detail/${inv_id}`)
         return
     }
-    console.log("no catch")
     next()
 }
 

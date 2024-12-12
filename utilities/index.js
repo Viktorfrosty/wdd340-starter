@@ -241,7 +241,7 @@ util.addReviewForm = function(check, invId, accountId, screenName, text = "") {
     let form = '<div>'
     if (check) {
         form += '<h2>Add your own review</h2>'
-        form += `<form id="VehicleReview" action="/inv/detail/create" method="post">`
+        form += `<form id="VehicleReview" action="/detail/generate" method="post">`
         form += '<label for="screen_name">Screen Name:</label></br>'
         form += `<input type="text" id="screen_name" name="screen_name" value="${screenName}" required readonly><br>` /* pattern="^[A-Z][A-Z][a-z]*$" */
         form += '<label for="review_text">Review Text:</label></br>'
@@ -252,7 +252,7 @@ util.addReviewForm = function(check, invId, accountId, screenName, text = "") {
         form += `<textarea name="review_text" id="review_text" required>${text}</textarea><br>`
         form += `<input type="hidden" name="inv_id" value= ${invId}>`
         form += `<input type="hidden" name="account_id" value= ${accountId}>`
-        form += '<input type="submit" value="Update Review">'
+        form += '<input type="submit" value="Create Review">'
         form += '</form>'
         form += '<script src="/js/script.js"></script>'
     } else {

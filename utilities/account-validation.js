@@ -228,7 +228,7 @@ const { account_id } = req.body
 let errors = []
 errors = validationResult(req)
 if (!errors.isEmpty()) {
-  req.flash("notice", "Invalid password")
+  req.flash("notice", "Invalid password.")
   res.redirect(`${account_id}`)
   return
 }
