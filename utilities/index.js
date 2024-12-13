@@ -236,7 +236,7 @@ util.buildVehicleReviews = async function (reviewsList) {
   if (reviewsList.length >= 1) {
     reviewsList.forEach(review => {
       reviews += '<li>'
-      reviews += `<p><b>${review.account_firstname.charAt(0)}${review.account_lastname}</b> wrote on ${review.review_date}</p>`
+      reviews += `<p class="marked"><b>${review.account_firstname.charAt(0)}${review.account_lastname}</b> wrote on ${review.review_date}</p>`
       reviews += `<p>${review.review_text}</p>`
       reviews += '</li>'
     })

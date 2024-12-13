@@ -346,3 +346,27 @@ form ul {
 form input[value="Create Classification"], form input[value="Update Vehicle"], form input[value="Delete Vehicle"], form input[value="Update Password"], form input[value="Update Information"], form input[value="Delete Review"], form input[value="Update Review"], form input[value="Create Review"] {
   width: 175px;
 }
+#vehicle-reviews {
+  max-width: 750px;
+  margin-bottom: 50px;
+}
+#vehicle-reviews li {
+  border-radius: 15px;
+  box-shadow: 15px 15px 5px var(--color-secondary);
+  background-color: var(--color-main);
+  padding: 10px;
+  border-width: 2px;
+  border-style: inset;
+  border-color: rgb(118, 118, 118);
+  border-image: initial;
+  margin-bottom: 25px;
+}
+#vehicle-reviews li p {
+  color: var(--color-accent1);
+}
+
+#vehicle-reviews li .marked {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: solid 2px var(--color-accent1);
+}
