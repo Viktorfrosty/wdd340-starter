@@ -1,104 +1,104 @@
 <section class="frame">
 
-    <h1>
-        <%= title %>
-    </h1>
+  <h1>
+    <%= title %>
+  </h1>
 
-    <%- messages() %>
+  <%- messages() %>
 
-    <% if (errors) { %>
-        <ul class="notice">
-        <% errors.array().forEach(error => { %>
-            <li><%= error.msg %></li>
-        <%  }) %>
-        </ul>
-        <% } %>
+  <% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+    <% } %>
 
-    <form action="/inv/add-inventory" method="post">
+  <form action="/inv/add-inventory" method="post">
 
-        <label for="inv_model">
-            Model:
-        </label><br>
-        <ul>
-            <li>First character should be uppercase or a number.</li>
-            <li>Special characters not allowed, except spaces.</li>
-        </ul>
-        <input type="text" id="inv_model" name="inv_model" pattern="^[A-Z0-9][A-Za-z0-9\s]*$" required value="<%= locals.inv_model %>"><br>
+    <label for="inv_model">
+      Model:
+    </label><br>
+    <ul>
+      <li>First character should be uppercase or a number.</li>
+      <li>Special characters not allowed, except spaces.</li>
+    </ul>
+    <input type="text" id="inv_model" name="inv_model" pattern="^[A-Z0-9][A-Za-z0-9\s]*$" required value="<%= locals.inv_model %>"><br>
 
-        <label for="inv_make">
-            Maker:
-        </label><br>
-        <ul>
-            <li>First character should be uppercase or a number.</li>
-            <li>Special characters not allowed, except spaces.</li>
-        </ul>
-        <input type="text" id="inv_make" name="inv_make" pattern="^[A-Z0-9][a-zA-Z0-9\s]*$" required value="<%= locals.inv_make %>"><br>
+    <label for="inv_make">
+      Maker:
+    </label><br>
+    <ul>
+      <li>First character should be uppercase or a number.</li>
+      <li>Special characters not allowed, except spaces.</li>
+    </ul>
+    <input type="text" id="inv_make" name="inv_make" pattern="^[A-Z0-9][a-zA-Z0-9\s]*$" required value="<%= locals.inv_make %>"><br>
 
-        <%- typeSelector %>
+    <%- typeSelector %>
 
-        <label for="inv_year">
-            Year:
-        </label><br>
-        <ul>
-            <li>Only numbers allowed.</li>
-            <li>Only four digits allowed</li>
-        </ul>
-        <input type="text" id="inv_year" name="inv_year" pattern="^[0-9]{4}$" required value="<%= locals.inv_year %>"><br>
+    <label for="inv_year">
+      Year:
+    </label><br>
+    <ul>
+      <li>Only numbers allowed.</li>
+      <li>Only four digits allowed</li>
+    </ul>
+    <input type="text" id="inv_year" name="inv_year" pattern="^[0-9]{4}$" required value="<%= locals.inv_year %>"><br>
 
-        <label for="inv_price">
-            Price:
-        </label><br>
-        <ul>
-            <li>Only numbers allowed.</li>
-        </ul>
-        <input type="text" id="inv_price" name="inv_price" pattern="^[0-9]{1,}$" required value="<%= locals.inv_price %>"><br>
+    <label for="inv_price">
+      Price:
+    </label><br>
+    <ul>
+      <li>Only numbers allowed.</li>
+    </ul>
+    <input type="text" id="inv_price" name="inv_price" pattern="^[0-9]{1,}$" required value="<%= locals.inv_price %>"><br>
 
-        <label for="inv_miles">
-            Miles:
-        </label><br>
-        <ul>
-            <li>Only numbers allowed.</li>
-        </ul>
-        <input type="text" id="inv_miles" name="inv_miles" pattern="^[0-9]{1,}$" required value="<%= locals.inv_miles %>"><br>
+    <label for="inv_miles">
+      Miles:
+    </label><br>
+    <ul>
+      <li>Only numbers allowed.</li>
+    </ul>
+    <input type="text" id="inv_miles" name="inv_miles" pattern="^[0-9]{1,}$" required value="<%= locals.inv_miles %>"><br>
 
-        <label for="inv_color">
-            Color:
-        </label><br>
-        <ul>
-            <li>Only alphabetical characters allowed</li>
-            <li>First character should be uppercase.</li>
-            <li>Special characters not allowed.</li>
-        </ul>
-        <input type="text" id="inv_color" name="inv_color" pattern="^[A-Z][a-zA-Z]*$" required value="<%= locals.inv_color %>"><br>
+    <label for="inv_color">
+      Color:
+    </label><br>
+    <ul>
+      <li>Only alphabetical characters allowed</li>
+      <li>First character should be uppercase.</li>
+      <li>Special characters not allowed.</li>
+    </ul>
+    <input type="text" id="inv_color" name="inv_color" pattern="^[A-Z][a-zA-Z]*$" required value="<%= locals.inv_color %>"><br>
 
-        <label for="inv_image">
-            Image:
-        </label><br>
-        <ul>
-            <li>No changes allowed.</li>
-        </ul>
-        <input type="text" id="inv_image" name="inv_image" pattern="^[a-zA-Z0-9/._-]+$" required readonly value="/images/vehicles/no-image.png"><br>
+    <label for="inv_image">
+      Image:
+    </label><br>
+    <ul>
+      <li>No changes allowed.</li>
+    </ul>
+    <input type="text" id="inv_image" name="inv_image" pattern="^[a-zA-Z0-9/._-]+$" required readonly value="/images/vehicles/no-image.png"><br>
 
-        <label for="inv_thumbnail">
-            Thumbnail:
-        </label><br>
-        <ul>
-            <li>No changes allowed.</li>
-        </ul>
-        <input type="text" id="inv_thumbnail" name="inv_thumbnail" pattern="^[a-zA-Z0-9/._-]+$" required readonly value="/images/vehicles/no-image-tn.png"><br>
+    <label for="inv_thumbnail">
+      Thumbnail:
+    </label><br>
+    <ul>
+      <li>No changes allowed.</li>
+    </ul>
+    <input type="text" id="inv_thumbnail" name="inv_thumbnail" pattern="^[a-zA-Z0-9/._-]+$" required readonly value="/images/vehicles/no-image-tn.png"><br>
 
-        <label for="inv_description">
-            Description:
-        </label><br>
-        <ul>
-            <li>First character should be uppercase or a number.</li>
-            <li>Special characters not allowed, except spaces, hyphens, dots and question marks.</li>
-        </ul>
-        <textarea name="inv_description" id="inv_description" required><%= locals.inv_description %></textarea><br>
+    <label for="inv_description">
+      Description:
+    </label><br>
+    <ul>
+      <li>First character should be uppercase or a number.</li>
+      <li>Special characters not allowed, except spaces, hyphens, dots and question marks.</li>
+    </ul>
+    <textarea name="inv_description" id="inv_description" required><%= locals.inv_description %></textarea><br>
 
-        <input type="submit" value="Add Vehicle">
+    <input type="submit" value="Add Vehicle">
 
-    </form>
+  </form>
 
 </section>
 

@@ -13,69 +13,69 @@ router.get("/detail/:invId", utilities.addReviewFormLoginChek, utilities.handleE
 
 // Route to build management
 router.get(
-    "/",
-    utilities.checkLogin,
-    utilities.checkAccountType,
-    utilities.handleErrors(invController.buildManagement)
+  "/",
+  utilities.checkLogin,
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.buildManagement)
 )
 
 // Route to build add classification
 router.get(
-    "/add-classification",
-    utilities.checkLogin,
-    utilities.checkAccountType,
-    utilities.handleErrors(invController.buildManagementAddClassification)
+  "/add-classification",
+  utilities.checkLogin,
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.buildManagementAddClassification)
 )
 
 // Route to build add inventory
 router.get(
-    "/add-inventory",
-    utilities.checkLogin,
-    utilities.checkAccountType,
-    utilities.handleErrors(invController.buildManagementAddInventory)
+  "/add-inventory",
+  utilities.checkLogin,
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.buildManagementAddInventory)
 )
 
 router.get(
-    "/getInventory/:classification_id",
-    utilities.handleErrors(invController.getInventoryJSON)
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
 )
 
 router.get(
-    "/edit/:inv_id",
-    utilities.checkLogin,
-    utilities.checkAccountType,
-    utilities.handleErrors(invController.editInventoryView)
+  "/edit/:inv_id",
+  utilities.checkLogin,
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.editInventoryView)
 )
 
 // deleting process
 router.get(
-    "/delete/:inv_id",
-    utilities.checkLogin,
-    utilities.checkAccountType,
-    utilities.handleErrors(invController.deleteInventoryViem)
+  "/delete/:inv_id",
+  utilities.checkLogin,
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.deleteInventoryViem)
 )
 
 // Process the add classification form
 router.post(
-    "/add-classification",
-    invValidate.addClassificationElementRules(),
-    invValidate.checkClassificationRegData,
-    utilities.handleErrors(invController.registerNewClassificationElement)
+  "/add-classification",
+  invValidate.addClassificationElementRules(),
+  invValidate.checkClassificationRegData,
+  utilities.handleErrors(invController.registerNewClassificationElement)
 )
 
 // Process the add inventory form
 router.post(
-    "/add-inventory",
-    invValidate.addInventoryElementRules(),
-    invValidate.checkInventoryRegData,
-    utilities.handleErrors(invController.registerNewInventoryElement)
+  "/add-inventory",
+  invValidate.addInventoryElementRules(),
+  invValidate.checkInventoryRegData,
+  utilities.handleErrors(invController.registerNewInventoryElement)
 )
 
 // process the update
 router.post(
-    "/update",
-    invValidate.checkInventoryUpdateData,
-    utilities.handleErrors(invController.updateInventory)
+  "/update",
+  invValidate.checkInventoryUpdateData,
+  utilities.handleErrors(invController.updateInventory)
 )
 
 // deleting process
@@ -83,10 +83,10 @@ router.post("/delete", utilities.handleErrors(invController.deleteInventoryObjec
 
 // create review
 router.post(
-    "/detail/add-review",
-    invValidate.createReviewRules(),
-    invValidate.checkReviewCreationData,
-    utilities.handleErrors(invController.createVehicleReview)
+  "/detail/add-review",
+  invValidate.createReviewRules(),
+  invValidate.checkReviewCreationData,
+  utilities.handleErrors(invController.createVehicleReview)
 )
 
 module.exports = router

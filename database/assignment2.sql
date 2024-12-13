@@ -14,17 +14,17 @@ VALUES (
 
 -- Query #2
 UPDATE 
-    public.account
+  public.account
 SET
-    account_type = 'Admin'
+  account_type = 'Admin'
 WHERE
-    account_id = 1; -- Tony Stark account_id
+  account_id = 1; -- Tony Stark account_id
 
 -- Query #3
 DELETE FROM
-    public.account
+  public.account
 WHERE
-    account_id = 1; -- Tony Stark account_id
+  account_id = 1; -- Tony Stark account_id
 
 -- Query #4
 UPDATE
@@ -40,27 +40,27 @@ WHERE
 
 -- Query #5
 SELECT 
-    inv_make, inv_model, classification_name 
+  inv_make, inv_model, classification_name 
 FROM 
-    public.inventory 
+  public.inventory 
 INNER JOIN 
-    public.classification 
+  public.classification 
 ON 
-    public.inventory.classification_id = public.classification.classification_id
+  public.inventory.classification_id = public.classification.classification_id
 WHERE 
-    classification_name = 'Sport';
+  classification_name = 'Sport';
 
 -- Query #6
 UPDATE
 	public.inventory 
 SET 
 	inv_image = REPLACE (
-        inv_image,
-        '/images/',
-        '/images/vehicles/'
+    inv_image,
+    '/images/',
+    '/images/vehicles/'
 	  ),
-    inv_thumbnail = REPLACE (
-        inv_thumbnail,
-        '/images/',
-        '/images/vehicles/'
+  inv_thumbnail = REPLACE (
+    inv_thumbnail,
+    '/images/',
+    '/images/vehicles/'
 	  );

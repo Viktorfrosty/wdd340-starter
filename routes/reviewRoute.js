@@ -11,27 +11,27 @@ const utilities = require("../utilities")
 
 // Route to build update page
 router.get(
-    "/edit/:review_id",
-    utilities.checkLogin,
-    utilities.checkReviewRelationship,
-    utilities.handleErrors(revController.buildReviewEdit)
+  "/edit/:review_id",
+  utilities.checkLogin,
+  utilities.checkReviewRelationship,
+  utilities.handleErrors(revController.buildReviewEdit)
 )
 
 // Route to build delete page
 router.get(
-    "/delete/:review_id",
-    utilities.checkLogin,
-    utilities.checkReviewRelationship,
-    utilities.handleErrors(revController.buildReviewDelete)
+  "/delete/:review_id",
+  utilities.checkLogin,
+  utilities.checkReviewRelationship,
+  utilities.handleErrors(revController.buildReviewDelete)
 )
 
 
 // Route to build update page
 router.post(
-    "/update",
-    validate.reviewRules(),
-    validate.checkReviewEditData,
-    utilities.handleErrors(revController.processReviewEdit)
+  "/update",
+  validate.reviewRules(),
+  validate.checkReviewEditData,
+  utilities.handleErrors(revController.processReviewEdit)
 )
 
 // Route to build delete page

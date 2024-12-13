@@ -2,46 +2,46 @@
 
 <section class="frame">
 
-    <h1>
-        <%= title %>
-    </h1>
+  <h1>
+    <%= title %>
+  </h1>
 
-    <%- messages() %>
+  <%- messages() %>
 
-    <% if (errors) { %>
-        <ul class="notice">
-        <% errors.array().forEach(error => { %>
-            <li><%= error.msg %></li>
-        <%  }) %>
-        </ul>
+  <% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+  <% } %>
+
+  <form id="updateForm" action="/review/delete" method="post">
+
+    <% if (locals.screenName) { %>
+      <label for="screenName">Autor:</label><br>
+      <input type="text" value="<%= locals.screenName %>" readonly><br>
     <% } %>
 
-    <form id="updateForm" action="/review/delete" method="post">
+    <label for="review_date">
+      Review Date:
+    </label><br>
+    <input type="text" id="review_date" name="review_date" <%# pattern="^[A-Z0-9][A-Za-z0-9\s]*$" %> value="<%= locals.review_date %>" required readonly><br> 
 
-        <% if (locals.screenName) { %>
-            <label for="screenName">Autor:</label><br>
-            <input type="text" value="<%= locals.screenName %>" readonly><br>
-        <% } %>
+    <label for="review_text">
+      Review Text:
+    </label><br>
+    <textarea name="review_text" id="review_text" required readonly><%= locals.review_text %></textarea><br>
 
-        <label for="review_date">
-            Review Date:
-        </label><br>
-        <input type="text" id="review_date" name="review_date" <%# pattern="^[A-Z0-9][A-Za-z0-9\s]*$" %> value="<%= locals.review_date %>" required readonly><br> 
+    <p>Confirm elimination - This is permanent.</p><br>
+    <input type="submit" value="Delete Review">
 
-        <label for="review_text">
-            Review Text:
-        </label><br>
-        <textarea name="review_text" id="review_text" required readonly><%= locals.review_text %></textarea><br>
+    <input type="hidden" name="review_id"
+    <% if(locals.review_id) { 
+      %> value="<%= locals.review_id %>"
+    <% } %>>
 
-        <p>Confirm elimination - This is permanent.</p><br>
-        <input type="submit" value="Delete Review">
-
-        <input type="hidden" name="review_id"
-        <% if(locals.review_id) { 
-            %> value="<%= locals.review_id %>"
-        <% } %>>
-
-    </form>
+  </form>
 
 </section>
 

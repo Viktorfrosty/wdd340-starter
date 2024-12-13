@@ -1,43 +1,43 @@
 <section class="frame">
 
-    <h1>
-        <%= title %>
-    </h1>
+  <h1>
+    <%= title %>
+  </h1>
 
-    <%- messages() %>
+  <%- messages() %>
 
-    <% if (errors) { %>
-        <ul class="notice">
-        <% errors.array().forEach(error => { %>
-            <li>
-                <%= error.msg %>
-            </li>
-        <%  }) %>
-        </ul>
-    <% } %>
+  <% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li>
+        <%= error.msg %>
+      </li>
+    <%  }) %>
+    </ul>
+  <% } %>
 
-    <h2>
-        Welcome <%= locals.accountData.account_firstname %>
-    </h2>
+  <h2>
+    Welcome <%= locals.accountData.account_firstname %>
+  </h2>
 
-    <a href="/account/edit/<%= locals.accountData.account_id %>">
-        Edit Account Information
-    </a>
+  <a href="/account/edit/<%= locals.accountData.account_id %>">
+    Edit Account Information
+  </a>
 
-    <% if(accType === "Employee" || accType === "Admin" ) { %>
+  <% if(accType === "Employee" || accType === "Admin" ) { %>
 
-        <h3>
-            Inventory Management
-        </h3>
+    <h3>
+      Inventory Management
+    </h3>
 
-        <p>
-            <a href="/inv">
-                Manage Inventory
-            </a>
-        </p>
+    <p>
+      <a href="/inv">
+        Manage Inventory
+      </a>
+    </p>
 
-    <% } %>
+  <% } %>
 
-    <%- reviewsList %>
+  <%- reviewsList %>
 
 </section>

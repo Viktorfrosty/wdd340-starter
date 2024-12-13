@@ -1,77 +1,77 @@
 <section class="frame">
 
-    <h1>
-        <%= title %>
-    </h1>
+  <h1>
+    <%= title %>
+  </h1>
 
-    <%- messages() %>
+  <%- messages() %>
 
-    <% if (errors) { %>
-        <ul class="notice">
-        <% errors.array().forEach(error => { %>
-            <li>
-                <%= error.msg %>
-            </li>
-        <%  }) %>
-        </ul>
-    <% } %>
+  <% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li>
+        <%= error.msg %>
+      </li>
+    <%  }) %>
+    </ul>
+  <% } %>
 
-    <form action="/account/edit/info" method="post" id="updateInfo">
+  <form action="/account/edit/info" method="post" id="updateInfo">
 
-        <h2>
-            Update Account Information
-        </h2>
+    <h2>
+      Update Account Information
+    </h2>
 
-        <input type="hidden" name="account_id" value="<%= account_id %>">
+    <input type="hidden" name="account_id" value="<%= account_id %>">
 
-        <label for="account_firstname">First Name</label><br>
-        <ul>
-            <li>First letter must be capital.</li>
-            <li>No numbers allowed.</li>
-            <li>No special characters allowed.</li>
-        </ul>
-        <input type="text" id="account_firstname" name="account_firstname" placeholder="<%= locals.accountData.account_firstname %>" pattern="^[A-Z][A-Za-z]*$" required value="<%= account_firstname %>"><br>
+    <label for="account_firstname">First Name</label><br>
+    <ul>
+      <li>First letter must be capital.</li>
+      <li>No numbers allowed.</li>
+      <li>No special characters allowed.</li>
+    </ul>
+    <input type="text" id="account_firstname" name="account_firstname" placeholder="<%= locals.accountData.account_firstname %>" pattern="^[A-Z][A-Za-z]*$" required value="<%= account_firstname %>"><br>
 
-        <label for="account_lastname">Last Name</label><br>
-        <ul>
-            <li>First letter must be capital.</li>
-            <li>No numbers allowed.</li>
-            <li>No special characters allowed.</li>
-        </ul>
-        <input type="text" id="account_lastname" name="account_lastname" placeholder="<%= locals.accountData.account_lastname %>" pattern="^[A-Z][A-Za-z]*$" required value="<%= account_lastname %>"><br>
+    <label for="account_lastname">Last Name</label><br>
+    <ul>
+      <li>First letter must be capital.</li>
+      <li>No numbers allowed.</li>
+      <li>No special characters allowed.</li>
+    </ul>
+    <input type="text" id="account_lastname" name="account_lastname" placeholder="<%= locals.accountData.account_lastname %>" pattern="^[A-Z][A-Za-z]*$" required value="<%= account_lastname %>"><br>
 
-        <label for="account_email">Email</label><br>
-        <input type="email" id="account_email" name="account_email" placeholder="<%= locals.accountData.account_email %>" required value="<%= account_email %>"><br>
+    <label for="account_email">Email</label><br>
+    <input type="email" id="account_email" name="account_email" placeholder="<%= locals.accountData.account_email %>" required value="<%= account_email %>"><br>
 
-        <input type="submit" value="Update Information" disabled>
+    <input type="submit" value="Update Information" disabled>
 
-    </form>
+  </form>
 
-    <form action="/account/edit/password" method="post" id="updatePassword">
+  <form action="/account/edit/password" method="post" id="updatePassword">
 
-        <h2>
-            Update Password
-        </h2>
-        <p>
-            Note: Save your new password, the old password will be erased.
-        </p>
-        
-        <input type="hidden" name="account_id" value="<%= account_id %>">
-        
-        <label for="account_password">
-            Password must contain:
-        </label><br>
-        <ul>
-            <li>12 characters in length, minimum.</li>
-            <li>at least 1 capital letter.</li>
-            <li>at least 1 number.</li>
-            <li>at least 1 special character.</li>
-        </ul><br>
-        <input type="password" id="account_password" name="account_password" placeholder="Enter a valid password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br>
+    <h2>
+      Update Password
+    </h2>
+    <p>
+      Note: Save your new password, the old password will be erased.
+    </p>
+    
+    <input type="hidden" name="account_id" value="<%= account_id %>">
+    
+    <label for="account_password">
+      Password must contain:
+    </label><br>
+    <ul>
+      <li>12 characters in length, minimum.</li>
+      <li>at least 1 capital letter.</li>
+      <li>at least 1 number.</li>
+      <li>at least 1 special character.</li>
+    </ul><br>
+    <input type="password" id="account_password" name="account_password" placeholder="Enter a valid password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br>
 
-        <input type="submit" value="Update Password" disabled>
+    <input type="submit" value="Update Password" disabled>
 
-    </form>
+  </form>
 
 </section>
 

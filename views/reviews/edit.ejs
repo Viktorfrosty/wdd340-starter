@@ -2,49 +2,49 @@
 
 <section class="frame">
 
-    <h1>
-        <%= title %>
-    </h1>
+  <h1>
+    <%= title %>
+  </h1>
 
-    <%- messages() %>
+  <%- messages() %>
 
-    <% if (errors) { %>
-        <ul class="notice">
-        <% errors.array().forEach(error => { %>
-            <li><%= error.msg %></li>
-        <%  }) %>
-        </ul>
+  <% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+  <% } %>
+
+  <form id="updateReview" action="/review/update" method="post">
+
+    <% if (locals.screenName) { %>
+      <label for="screenName">Autor:</label><br>
+      <input type="text" value="<%= locals.screenName %>" readonly><br>
     <% } %>
 
-    <form id="updateReview" action="/review/update" method="post">
+    <label for="review_date">
+      Review Date:
+    </label><br>
+    <input type="text" id="review_date" name="review_date" <%# pattern="^[A-Z0-9][A-Za-z0-9\s]*$" %> value="<%= locals.review_date %>" required readonly><br> 
 
-        <% if (locals.screenName) { %>
-            <label for="screenName">Autor:</label><br>
-            <input type="text" value="<%= locals.screenName %>" readonly><br>
-        <% } %>
+    <label for="review_text">
+      Review Text:
+    </label><br>
+    <ul>
+      <li>First character should be uppercase or a number.</li>
+      <li>Special characters not allowed, except spaces, hyphens, dots and question marks.</li>
+    </ul>
+    <textarea name="review_text" id="review_text" required><%= locals.review_text %></textarea><br>
 
-        <label for="review_date">
-            Review Date:
-        </label><br>
-        <input type="text" id="review_date" name="review_date" <%# pattern="^[A-Z0-9][A-Za-z0-9\s]*$" %> value="<%= locals.review_date %>" required readonly><br> 
+    <input type="submit" value="Update Review" disabled>
 
-        <label for="review_text">
-            Review Text:
-        </label><br>
-        <ul>
-            <li>First character should be uppercase or a number.</li>
-            <li>Special characters not allowed, except spaces, hyphens, dots and question marks.</li>
-        </ul>
-        <textarea name="review_text" id="review_text" required><%= locals.review_text %></textarea><br>
+    <input type="hidden" name="review_id"
+    <% if(locals.review_id) { 
+      %> value="<%= locals.review_id %>"
+    <% } %>>
 
-        <input type="submit" value="Update Review" disabled>
-
-        <input type="hidden" name="review_id"
-        <% if(locals.review_id) { 
-            %> value="<%= locals.review_id %>"
-        <% } %>>
-
-    </form>
+  </form>
 
 </section>
 
