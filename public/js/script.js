@@ -1,7 +1,7 @@
 const inputs = document.querySelectorAll('input[type="text"], input[type="password"], input[type="email"], textarea')
 const selects = document.querySelectorAll("select")
 let text = document.querySelector("textarea")
-const pattern = /^[A-Z0-9][A-Za-z0-9\s\.\-\?]*$/
+const pattern = /^[A-Z0-9][A-Za-z0-9\s\.\-\?]{9,}$/
 
 selects.forEach(select => {
   select.classList.toggle("touched", true)
@@ -21,7 +21,7 @@ if (text) {
 
   text.addEventListener("input", function (event) {  
     if (!pattern.test(event.target.value)) { 
-      event.target.setCustomValidity("Please follow the pattern: Start with an uppercase letter or a digit, followed by any combination of uppercase letters, lowercase letters, digits, spaces, dots, hyphens, or question marks.") 
+      event.target.setCustomValidity("Please follow the indications.")
     } else { 
       event.target.setCustomValidity("") 
     } 
@@ -29,7 +29,7 @@ if (text) {
   
   document.addEventListener("DOMContentLoaded", function() { 
     if (!pattern.test(text.value)) { 
-      text.setCustomValidity("Please follow the pattern: Start with a capital letter or number, followed by letters, numbers, or spaces.") 
+      text.setCustomValidity("Please follow the indications.") 
     } else { 
       text.setCustomValidity("") 
     }

@@ -28,24 +28,28 @@ invCont.buildByVehicleInfo = async function (req, res, next) {
   const wrap = await utilities.buildVehicleInformation(info)
   const data = await invModel.getVehicleReviewsByInventoryId(inv_id)
   const reviewsList = await utilities.buildVehicleReviews(data)
-  let name
+  let screenName
   let accountId
   if (res.locals.accountData) {
-    name = `${res.locals.accountData.account_firstname.charAt(0)}${res.locals.accountData.account_lastname}`
+    screenName = `${res.locals.accountData.account_firstname.charAt(0)}${res.locals.accountData.account_lastname}`
     accountId = res.locals.accountData.account_id
   }
-  const text = res.locals.review_text
-  const addReview = utilities.addReviewForm(res.locals.formCheck, inv_id, accountId, name, text)
+  const check = res.locals.formCheck
   let nav = await utilities.getNav()
   const title = `${info[0].inv_make} ${info[0].inv_model}`
   const year = `${info[0].inv_year}`
   res.render("./vehicles/vehicle", {
     year: year,
     title: title,
+    errors: null,
     nav,
     wrap,
     reviewsList,
-    addReview
+    check,
+    inv_id,
+    screen_name: screenName,
+    account_id: accountId,
+    review_text: ""
   })
 }
 
@@ -344,18 +348,38 @@ invCont.deleteInventoryObject = async function (req, res, next) {
 * Create Inventory Review
 ****************************/
 invCont.createVehicleReview = async function (req, res) {
-  const { review_text, inv_id, account_id } = req.body
+  const { inv_id, account_id, check, screen_name, review_text } = req.body
   const result = await invModel.createVehicleReview(
     review_text,
     inv_id,
     account_id
   )
+  // const result = false
   if (result) {
-    req.flash("notice", "The review created successfully.")
+    req.flash("notice", "The review was created successfully.")
     res.status(201).redirect(`/inv/detail/${inv_id}`)
   } else {
-    req.flash("notice", "The review could not be created.")
-    res.status(501).redirect(`/inv/detail/${inv_id}`)
+    req.flash("notice", "The review was not be created.")
+    let nav = await utilities.getNav()
+    const info = await invModel.getVehicleInfoByInventoryId(inv_id)
+    const wrap = await utilities.buildVehicleInformation(info)
+    const data = await invModel.getVehicleReviewsByInventoryId(inv_id)
+    const reviewsList = await utilities.buildVehicleReviews(data)
+    const title = `${info[0].inv_make} ${info[0].inv_model}`
+    const year = `${info[0].inv_year}`
+    res.render("./vehicles/vehicle", {
+      year: year,
+      title: title,
+      errors: null,
+      nav,
+      wrap,
+      reviewsList,
+      check,
+      inv_id,
+      screen_name,
+      account_id,
+      review_text
+    })
   }
 }
 

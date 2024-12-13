@@ -26,14 +26,21 @@
     <label for="review_date">
       Review Date:
     </label><br>
-    <input type="text" id="review_date" name="review_date" <%# pattern="^[A-Z0-9][A-Za-z0-9\s]*$" %> value="<%= locals.review_date %>" required readonly><br> 
+    <input type="text" id="review_date" name="review_date" value="<%= locals.review_date %>" readonly><br> 
 
     <label for="review_text">
       Review Text:
     </label><br>
     <ul>
-      <li>First character should be uppercase or a number.</li>
-      <li>Special characters not allowed, except spaces, hyphens, dots and question marks.</li>
+      <li>
+        First character should be uppercase or a number.
+      </li>
+      <li>
+        Special characters not allowed, except spaces, hyphens, dots and question marks.
+      </li>
+      <li>
+        A minimum length of ten (10) characters.
+      </li>
     </ul>
     <textarea name="review_text" id="review_text" required><%= locals.review_text %></textarea><br>
 

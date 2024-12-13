@@ -11,8 +11,6 @@ validate.addClassificationElementRules = () => {
     body("classification_name")
       .matches(/^[A-Z][A-Za-z]*$/)
       .withMessage("Please provide a valid classification name.")
-      .notEmpty()
-      .withMessage("Please provide a classification name.")
       .custom(async (classification_name) => {
         const classExists = await inventoryModel.checkExistingClassification(classification_name)
         if (classExists){
@@ -29,53 +27,28 @@ validate.addInventoryElementRules = () => {
   return [ 
     body("inv_model") 
       .matches(/^[A-Z0-9][A-Za-z0-9\s]*$/) 
-      .withMessage('Model must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.') 
-      .notEmpty() 
-      .withMessage('Model is required.'), 
+      .withMessage('Model must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.'), 
     body("inv_make") 
       .matches(/^[A-Z0-9][a-zA-Z0-9\s]*$/) 
-      .withMessage('Maker must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.') 
-      .notEmpty() 
-      .withMessage('Maker is required.'), 
+      .withMessage('Maker must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.'), 
     body("classification_id")
       .notEmpty() 
       .withMessage('Classification ID is required.'),
     body("inv_year") 
       .matches(/^[0-9]{4}$/) 
-      .withMessage('Year must be a 4-digit number.') 
-      .notEmpty() 
-      .withMessage('Year is required.'), 
+      .withMessage('Year must be a 4-digit number.'), 
     body("inv_price") 
       .matches(/^[0-9]{1,}$/) 
-      .withMessage('Price must be a number.')
-      .notEmpty() 
-      .withMessage('Price is required.'), 
+      .withMessage('Price must be a number.'), 
     body("inv_miles") 
       .matches(/^[0-9]{1,}$/) 
-      .withMessage('Miles must be a number.')
-      .notEmpty() 
-      .withMessage('Miles is required.'), 
+      .withMessage('Miles must be a number.'), 
     body("inv_color") 
       .matches(/^[A-Z][a-zA-Z]*$/) 
-      .withMessage('Color must start with an uppercase letter and contain only alphabetical characters.') 
-      .notEmpty() 
-      .withMessage('Color is required.'), 
+      .withMessage('Color must start with an uppercase letter and contain only alphabetical characters.'), 
     body("inv_description") 
       .matches(/^[A-Z0-9][A-Za-z0-9\s\.\-\?]*$/)
-      // .matches(/^[A-Z0-9][A-Za-z0-9\s]*$/)
-      .withMessage('Description must start with an uppercase letter or digit and can contain alphanumeric characters and spaces.')
-      .notEmpty() 
-      .withMessage('Description is required.'), 
-    body("inv_image") 
-      .matches(/^[a-zA-Z0-9/._-]+$/) 
-      .withMessage('Image must be a valid path with allowed characters.') 
-      .notEmpty() 
-      .withMessage('Image is required.'), 
-    body("inv_thumbnail") 
-      .matches(/^[a-zA-Z0-9/._-]+$/) 
-      .withMessage('Thumbnail must be a valid path with allowed characters.') 
-      .notEmpty() 
-      .withMessage('Thumbnail is required.')
+      .withMessage('Description must have a minimun lenght of ten (10) characters, and it needs to start with an uppercase letter or a digit, followed by a combination Uppercase letters, lowercase letters, digits, spaces, dots, hyphens, or question marks.')
   ];
 }
 
@@ -163,11 +136,9 @@ validate.checkInventoryUpdateData = async (req, res, next) => {
 // validate the review data in the inv/detail form
 validate.createReviewRules = () => {
   return [
-    body("review_text") 
-      .matches(/^[A-Z0-9][A-Za-z0-9\s\.\-\?]*$/)
-      .withMessage('Review Text must start with an uppercase letter or a digit, followed by any combination of uppercase letters, lowercase letters, digits, spaces, dots, hyphens, or question marks.')
-      .notEmpty() 
-      .withMessage('Review Text is required.'),
+    body("review_text")
+      .matches(/^[A-Z0-9][A-Za-z0-9\s\.\-\?]{9,}$/)
+      .withMessage('Review must have a minimun lenght of ten (10) characters, and it needs to start with an uppercase letter or a digit, followed by a combination Uppercase letters, lowercase letters, digits, spaces, dots, hyphens, or question marks.'),
   ]
 }
 
@@ -175,12 +146,30 @@ validate.createReviewRules = () => {
  * Check data and return errors or continue to review registration
  * ***************************** */
 validate.checkReviewCreationData = async (req, res, next) => {
-  const { inv_id, review_text } = req.body
+  const { inv_id, account_id, check, screen_name, review_text } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
-    req.flash("notice", "The review could not be created.")
-    res.redirect(`/inv/detail/${inv_id}`)
+    let nav = await utilities.getNav()
+    const info = await inventoryModel.getVehicleInfoByInventoryId(inv_id)
+    const wrap = await utilities.buildVehicleInformation(info)
+    const data = await inventoryModel.getVehicleReviewsByInventoryId(inv_id)
+    const reviewsList = await utilities.buildVehicleReviews(data)
+    const title = `${info[0].inv_make} ${info[0].inv_model}`
+    const year = `${info[0].inv_year}`
+    res.render("./vehicles/vehicle", {
+      year: year,
+      title: title,
+      errors,
+      nav,
+      wrap,
+      reviewsList,
+      check,
+      inv_id,
+      screen_name,
+      account_id,
+      review_text
+    })
     return
   }
   next()

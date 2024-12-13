@@ -17,10 +17,8 @@ const validate = {}
 validate.reviewRules = () => {
   return [
     body("review_text") 
-      .matches(/^[A-Z0-9][A-Za-z0-9\s\.\-\?]*$/)
-      .withMessage('Review Text must start with an uppercase letter or a digit, followed by any combination of uppercase letters, lowercase letters, digits, spaces, dots, hyphens, or question marks.')
-      .notEmpty() 
-      .withMessage('Review Text is required.')
+      .matches(/^[A-Z0-9][A-Za-z0-9\s\.\-\?]{9,}$/)
+      .withMessage('Review must have a minimun lenght of ten (10) characters, and it needs to start with an uppercase letter or a digit, followed by a combination Uppercase letters, lowercase letters, digits, spaces, dots, hyphens, or question marks.')
   ]
 }
 

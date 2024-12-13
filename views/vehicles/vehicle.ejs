@@ -7,10 +7,58 @@
 
   <%- messages() %>
 
+  <% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+  <% } %>
+
   <%- wrap %>
 
   <%- reviewsList %>
 
-  <%- addReview %>
+  <div>
+
+    <% if(check) { %>
+      <h2>
+        Add your own review
+      </h2>
+
+      <form id="VehicleReview" action="/inv/detail/<%= inv_id %>" method="post">
+
+        <label for="screen_name">Screen Name:</label></br>
+        <input type="text" id="screen_name" name="screen_name" value="<%= screen_name %>" readonly><br>
+
+        <label for="review_text">Review Text:</label></br>
+        <ul>
+          <li>
+            First character should be uppercase or a number.
+          </li>
+          <li>
+            Special characters not allowed, except spaces, hyphens, dots and question marks.
+          </li>
+          <li>
+            A minimum length of ten (10) characters.
+          </li>
+        </ul>
+        <textarea name="review_text" id="review_text" required><%= review_text %></textarea><br>
+
+        <input type="hidden" name="check" value= "<%= check %>">
+        <input type="hidden" name="inv_id" value= "<%= inv_id %>">
+        <input type="hidden" name="account_id" value= "<%= account_id %>">
+        <input type="submit" value="Create Review">
+
+      </form>
+    <% } else { %>
+      <p>
+        You must <a href="/account/login">Login</a> to write a review.
+      </p>
+    <% } %>
+
+  </div>
 
 </section>
+
+<script src="/js/script.js"></script>

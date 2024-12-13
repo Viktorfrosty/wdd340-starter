@@ -262,33 +262,6 @@ util.addReviewFormLoginChek = (req, res, next) => {
   next()
 }
 
-/*********************************************
-* Build the review form html for the inv/detail
-*********************************************/
-util.addReviewForm = function(check, invId, accountId, screenName, text = "") {
-  let form = '<div>'
-  if (check) {
-    form += '<h2>Add your own review</h2>'
-    form += `<form id="VehicleReview" action="/inv/detail/add-review" method="post">`
-    form += '<label for="screen_name">Screen Name:</label></br>'
-    form += `<input type="text" id="screen_name" name="screen_name" value="${screenName}" required readonly><br>` /* pattern="^[A-Z][A-Z][a-z]*$" */
-    form += '<label for="review_text">Review Text:</label></br>'
-    form += '<ul>'
-    form += '<li>First character should be uppercase or a number.</li>'
-    form += '<li>Special characters not allowed, except spaces, hyphens, dots and question marks.</li>'
-    form += '</ul>'
-    form += `<textarea name="review_text" id="review_text" required>${text}</textarea><br>`
-    form += `<input type="hidden" name="inv_id" value= ${invId}>`
-    form += `<input type="hidden" name="account_id" value= ${accountId}>`
-    form += '<input type="submit" value="Create Review">'
-    form += '</form>'
-    form += '<script src="/js/script.js"></script>'
-  } else {
-    form += '<p>You must <a href="/account/login">Login</a> to write a review.</p>'
-  }
-  form += '</div>'
-  return form
-}
 //
 
 module.exports = util

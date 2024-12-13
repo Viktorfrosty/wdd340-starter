@@ -26,12 +26,12 @@
     <label for="review_date">
       Review Date:
     </label><br>
-    <input type="text" id="review_date" name="review_date" <%# pattern="^[A-Z0-9][A-Za-z0-9\s]*$" %> value="<%= locals.review_date %>" required readonly><br> 
+    <input type="text" id="review_date" name="review_date" value="<%= locals.review_date %>" readonly><br> 
 
     <label for="review_text">
       Review Text:
     </label><br>
-    <textarea name="review_text" id="review_text" required readonly><%= locals.review_text %></textarea><br>
+    <textarea name="review_text" id="review_text" readonly><%= locals.review_text %></textarea><br>
 
     <p>Confirm elimination - This is permanent.</p><br>
     <input type="submit" value="Delete Review">
