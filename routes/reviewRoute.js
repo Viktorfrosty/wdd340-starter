@@ -2,7 +2,9 @@
 * Final Enhancement Task
 ***********************************/
 
-// Needed Resources
+/************************
+* Needed Resources
+*************************/
 const validate = require("../utilities/review-validation")
 const express = require("express")
 const router = new express.Router()
@@ -28,7 +30,7 @@ router.get(
 
 // Route to build update page
 router.post(
-  "/update",
+  "/edit/:review_id",
   validate.reviewRules(),
   validate.checkReviewEditData,
   utilities.handleErrors(revController.processReviewEdit)

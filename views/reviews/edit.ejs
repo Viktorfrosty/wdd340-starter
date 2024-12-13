@@ -16,7 +16,7 @@
     </ul>
   <% } %>
 
-  <form id="updateReview" action="/review/update" method="post">
+  <form id="updateReview" action="/review/edit/<%= locals.review_id %>" method="post">
 
     <% if (locals.screenName) { %>
       <label for="screenName">Autor:</label><br>
@@ -44,12 +44,8 @@
     </ul>
     <textarea name="review_text" id="review_text" required><%= locals.review_text %></textarea><br>
 
+    <input type="hidden" name="review_id" value="<%= locals.review_id %>">
     <input type="submit" value="Update Review" disabled>
-
-    <input type="hidden" name="review_id"
-    <% if(locals.review_id) { 
-      %> value="<%= locals.review_id %>"
-    <% } %>>
 
   </form>
 

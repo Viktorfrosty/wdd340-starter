@@ -2,13 +2,17 @@
 * Final Enhancement Task
 ***********************************/
 
-// Needed Resources
+/************************
+* Needed Resources
+*************************/
 const revModel = require("../models/review-model")
 const utilities = require("../utilities/")
 
 const revCont = {}
 
-// Build Edit Review View
+/************************
+* Build Edit Review View
+*************************/
 revCont.buildReviewEdit = async function (req, res, next) {
   let nav = await utilities.getNav()
   const review_id = req.params.review_id
@@ -24,7 +28,9 @@ revCont.buildReviewEdit = async function (req, res, next) {
   })
 }
 
-// Build delete Review View
+/************************
+* Build delete Review View
+*************************/
 revCont.buildReviewDelete = async function (req, res, next) {
   let nav = await utilities.getNav()
   const review_id = req.params.review_id
@@ -40,7 +46,9 @@ revCont.buildReviewDelete = async function (req, res, next) {
   })
 }
 
-// Process Review Edit
+/************************
+* Process Review Edit
+*************************/
 revCont.processReviewEdit = async function (req, res, next) {
   const { review_id, review_text } = req.body
   const result = await revModel.updateReview(review_text, review_id)
@@ -64,10 +72,13 @@ revCont.processReviewEdit = async function (req, res, next) {
   }
 }
 
-// Process Review Delete
+/************************
+* Process Review Delete
+*************************/
 revCont.processReviewDelete = async function (req, res, next) {
   const { review_id } = req.body
   const result = await revModel.deleteReview(review_id)
+  // const result = false
   if (result) {
     req.flash("notice", "Review erased successfully.")
     res.redirect("/account")
