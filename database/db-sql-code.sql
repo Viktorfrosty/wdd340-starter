@@ -283,3 +283,19 @@ ALTER TABLE IF EXISTS public.review
 	REFERENCES public.inventory (inv_id) MATCH SIMPLE
 	ON UPDATE CASCADE
 	ON DELETE CASCADE;
+
+-- if required:
+
+-- UPDATE 
+--   public.account
+-- SET
+--   account_type = 'Employee'
+-- WHERE
+--   account_id = 2; --employee id
+
+-- UPDATE 
+--   public.account
+-- SET
+--   account_type = 'Admin'
+-- WHERE
+--   account_id = 3; --admin id

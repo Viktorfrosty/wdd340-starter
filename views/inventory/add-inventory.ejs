@@ -20,8 +20,14 @@
       Model:
     </label><br>
     <ul>
-      <li>First character should be uppercase or a number.</li>
-      <li>Special characters not allowed, except spaces.</li>
+      <li>
+        First character should be uppercase or a number.
+
+      </li>
+      <li>
+        Special characters not allowed, except spaces.
+
+      </li>
     </ul>
     <input type="text" id="inv_model" name="inv_model" pattern="^[A-Z0-9][A-Za-z0-9\s]*$" required value="<%= locals.inv_model %>"><br>
 
@@ -29,8 +35,12 @@
       Maker:
     </label><br>
     <ul>
-      <li>First character should be uppercase or a number.</li>
-      <li>Special characters not allowed, except spaces.</li>
+      <li>
+        First character should be uppercase or a number.
+      </li>
+      <li>
+        Special characters not allowed, except spaces.
+      </li>
     </ul>
     <input type="text" id="inv_make" name="inv_make" pattern="^[A-Z0-9][a-zA-Z0-9\s]*$" required value="<%= locals.inv_make %>"><br>
 
@@ -40,8 +50,12 @@
       Year:
     </label><br>
     <ul>
-      <li>Only numbers allowed.</li>
-      <li>Only four digits allowed</li>
+      <li>
+        Only numbers allowed.
+      </li>
+      <li>
+        Only four digits allowed
+      </li>
     </ul>
     <input type="text" id="inv_year" name="inv_year" pattern="^[0-9]{4}$" required value="<%= locals.inv_year %>"><br>
 
@@ -49,7 +63,9 @@
       Price:
     </label><br>
     <ul>
-      <li>Only numbers allowed.</li>
+      <li>
+        Only numbers allowed.
+      </li>
     </ul>
     <input type="text" id="inv_price" name="inv_price" pattern="^[0-9]{1,}$" required value="<%= locals.inv_price %>"><br>
 
@@ -57,7 +73,9 @@
       Miles:
     </label><br>
     <ul>
-      <li>Only numbers allowed.</li>
+      <li>
+        Only numbers allowed.
+      </li>
     </ul>
     <input type="text" id="inv_miles" name="inv_miles" pattern="^[0-9]{1,}$" required value="<%= locals.inv_miles %>"><br>
 
@@ -65,9 +83,15 @@
       Color:
     </label><br>
     <ul>
-      <li>Only alphabetical characters allowed.</li>
-      <li>First character should be uppercase.</li>
-      <li>Special characters not allowed.</li>
+      <li>
+        Only alphabetical characters allowed.
+      </li>
+      <li>
+        First character should be uppercase.
+      </li>
+      <li>
+        Special characters not allowed.
+      </li>
     </ul>
     <input type="text" id="inv_color" name="inv_color" pattern="^[A-Z][a-zA-Z]*$" required value="<%= locals.inv_color %>"><br>
 
@@ -75,7 +99,9 @@
       Image:
     </label><br>
     <ul>
-      <li>No changes allowed.</li>
+      <li>
+        No changes allowed.
+      </li>
     </ul>
     <input type="text" id="inv_image" name="inv_image" required readonly value="/images/vehicles/no-image.png"><br>
 
@@ -83,7 +109,9 @@
       Thumbnail:
     </label><br>
     <ul>
-      <li>No changes allowed.</li>
+      <li>
+        No changes allowed.
+      </li>
     </ul>
     <input type="text" id="inv_thumbnail" name="inv_thumbnail" required readonly value="/images/vehicles/no-image-tn.png"><br>
 
@@ -91,8 +119,15 @@
       Description:
     </label><br>
     <ul>
-      <li>First character should be uppercase or a number.</li>
-      <li>Special characters not allowed, except spaces, hyphens, dots and question marks.</li>
+      <li>
+        First character should be uppercase or a number.
+      </li>
+      <li>
+        Special characters not allowed, except spaces, hyphens, dots and question marks.
+      </li>
+      <li>
+        A minimum length of ten (10) characters.
+      </li>
     </ul>
     <textarea name="inv_description" id="inv_description" required><%= locals.inv_description %></textarea><br>
 

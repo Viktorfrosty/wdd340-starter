@@ -23,7 +23,7 @@ validate.addClassificationElementRules = () => {
 /*  **********************************
 *  Inventory Data Validation Rules
 * ********************************* */
-validate.addInventoryElementRules = () => { 
+validate.inventoryElementRules = () => { 
   return [ 
     body("inv_model") 
       .matches(/^[A-Z0-9][A-Za-z0-9\s]*$/) 

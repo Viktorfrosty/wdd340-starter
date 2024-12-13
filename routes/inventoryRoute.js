@@ -66,7 +66,7 @@ router.post(
 // Process the add inventory form
 router.post(
   "/add-inventory",
-  invValidate.addInventoryElementRules(),
+  invValidate.inventoryElementRules(),
   invValidate.checkInventoryRegData,
   utilities.handleErrors(invController.registerNewInventoryElement)
 )
@@ -74,6 +74,7 @@ router.post(
 // process the update
 router.post(
   "/update",
+  invValidate.inventoryElementRules(),
   invValidate.checkInventoryUpdateData,
   utilities.handleErrors(invController.updateInventory)
 )

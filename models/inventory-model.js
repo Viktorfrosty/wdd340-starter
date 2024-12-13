@@ -135,29 +135,7 @@ async function updateInventory(
 ****************************/
 async function deleteInventoryObject(inv_id) {
   try {
-    const preWork = deleteInventoryObjectReviews(inv_id)
-    if (preWork) {
-      try {
-        const sql = "DELETE FROM public.inventory WHERE inv_id = $1"
-        const data = await pool.query(sql, [inv_id])
-        return data
-      } catch (error) {
-        console.error(error)
-      }
-    } else {
-      throw new Error("Something went wrong!")
-    }
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-/****************************
-* Delete Inventory entry related reviews
-****************************/
-async function deleteInventoryObjectReviews(inv_id) {
-  try {
-    const sql = "DELETE FROM public.reviews WHERE inv_id = $1"
+    const sql = "DELETE FROM public.inventory WHERE inv_id = $1"
     const data = await pool.query(sql, [inv_id])
     return data
   } catch (error) {
@@ -190,4 +168,4 @@ async function createVehicleReview(review_text, inv_id, account_id) {
   }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification, registerInventoryElement, updateInventory, deleteInventoryObject, getVehicleReviewsByInventoryId, createVehicleReview, deleteInventoryObjectReviews }
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleInfoByInventoryId, registerClassificationElement, checkExistingClassification, registerInventoryElement, updateInventory, deleteInventoryObject, getVehicleReviewsByInventoryId, createVehicleReview }
